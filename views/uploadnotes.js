@@ -8,4 +8,7 @@ for (let i = 0; i < x.length; i ++) {
     map.set(newArr[0],newArr[1]);
 }
 
-console.log(map);
+// going to display the definition
+function displayDef(term) {
+    return map1.get(term);
+}
