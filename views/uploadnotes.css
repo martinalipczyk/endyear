@@ -1,0 +1,9 @@
+/* ik it doesn't look good just working on an idea to make the flashcards appear in this div */
+.flashcards {
+    color: red;
+    background-color: blue;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
