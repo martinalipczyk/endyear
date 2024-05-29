@@ -5,7 +5,7 @@ const totalQuestionsElement = document.querySelector(".total-questions");
 
 let currentQuestionIndex = 0;
 let correct = 0;
-let totalQuestions;
+let totalQuestions = 5;
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function shortQuiz(){
-    loadQuestion();
     totalQuestions = 5;
     removeButtons();
 
@@ -24,14 +23,12 @@ function shortQuiz(){
 }
 
 function mediumQuiz(){
-    loadQuestion();
     totalQuestions = 15; 
     removeButtons();
 
 }
 
 function longQuiz(){
-    loadQuestion();
     totalQuestions = 30; 
     removeButtons();
 
@@ -47,19 +44,29 @@ function removeButtons(){
 
     totalQuestionsElement.textContent = totalQuestions;
 
+    const userQuestion = document.querySelector(".userQuestion");
+    userQuestion.parentNode.removeChild(userQuestion);
+
+    userQuestion.classList.remove("hidden");
+
+
+
+
+
 
 
 }
 
 async function loadQuestion() {
-    const apiurl = "https://opentdb.com/api.php?amount=20";
+    const apiurl = "https://opentdb.com/api.php?amount=30";
     const result = await fetch(apiurl);
     const quizData = await result.json();
     showQuestion(quizData.results[currentQuestionIndex]);
 }
 
 function showQuestion(quizData) {
-    questionElement.textContent = quizData.question;
+    let questionNumber = currentQuestionIndex+1;
+    questionElement.textContent = "#"+questionNumber+ ". " + quizData.question;
 
     optionsElement.innerHTML = "";
 
