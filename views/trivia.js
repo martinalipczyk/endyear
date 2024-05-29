@@ -5,7 +5,7 @@ const totalQuestionsElement = document.querySelector(".total-questions");
 
 let currentQuestionIndex = 0;
 let correct = 0;
-let totalQuestions = 10;
+let totalQuestions;
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
@@ -13,6 +13,43 @@ document.addEventListener("DOMContentLoaded", function() {
     correctScoreElement.textContent = correct;
     totalQuestionsElement.textContent = totalQuestions;
 });
+
+
+function shortQuiz(){
+    loadQuestion();
+    totalQuestions = 5;
+    removeButtons();
+
+
+}
+
+function mediumQuiz(){
+    loadQuestion();
+    totalQuestions = 15; 
+    removeButtons();
+
+}
+
+function longQuiz(){
+    loadQuestion();
+    totalQuestions = 30; 
+    removeButtons();
+
+}
+
+function removeButtons(){
+    const shortButton = document.querySelector(".short");
+    const mediumButton = document.querySelector(".medium");
+    const longButton = document.querySelector(".long");
+    shortButton.parentNode.removeChild(shortButton);
+    mediumButton.parentNode.removeChild(mediumButton);
+    longButton.parentNode.removeChild(longButton);
+
+    totalQuestionsElement.textContent = totalQuestions;
+
+
+
+}
 
 async function loadQuestion() {
     const apiurl = "https://opentdb.com/api.php?amount=20";
