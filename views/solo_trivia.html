@@ -14,14 +14,14 @@
     <body>
         <div class="container center-align">
             <h1>Welcome to Solo Trivia</h1>
-            <h3>How long do you want your quiz to be?</h3>
+            <h3 class = "userQuestion">How long do you want your quiz to be?</h3>
             <div>
                 <button onclick="shortQuiz()" class ="short">short</button>
                 <button onclick = "mediumQuiz()" class ="medium">medium</button>
                 <button onclick = "longQuiz()" class ="long">long</button>
 
             </div>
-
+            <div class = "display hidden">
             <div>
                 <span class = "correct-score"></span>/
                 <span class = "total-questions"></span>
@@ -34,6 +34,7 @@
                 <!-- options will be dynamically added here -->
             </div>
         </div>
+    </div>
         
         <script src="trivia.js"></script>
         <!-- Compiled and minified JavaScript -->
