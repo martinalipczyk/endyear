@@ -1,100 +1,74 @@
 const socket = io.connect("http://localhost:3000");
 
-let players = [];
+document.getElementById("startGameButton").onclick = () => {
+    const questionAmount = document.getElementById("questionAmount").value;
+    socket.emit("selectQuestions", questionAmount);
+};
 
-// const questionElement = document.querySelector(".question");
-// const optionsElement = document.querySelector(".options");
-// const correctScoreElement = document.querySelector(".correct-score");
-// const totalQuestionsElement = document.querySelector(".total-questions");
+socket.on("startGame", (question) => {
+    displayQuestion(question);
+});
 
+socket.on("newQuestion", (question) => {
+    displayQuestion(question);
+    enableOptions();
+});
 
-// let currentQuestionIndex = 0;
-// let correct = 0;
-// let totalQuestions = 10;
+socket.on("correctAnswer", (score) => {
+    updateScores(score);
+});
 
+socket.on("wrongAnswer", (score) => {
+    updateScores(score);
+});
 
-// // Event Listeners
-// document.addEventListener("DOMContentLoaded", function() {
-//     loadQuestion();
-//     correctScoreElement.textContent = correct;
-//     totalQuestionsElement.textContent = totalQuestions;
-// });
+socket.on("gameOver", () => {
+    gameOver();
+});
 
-// async function loadQuestion(){
-//     const apiurl = "https://opentdb.com/api.php?amount=20"; 
-//     const result = await fetch(apiurl);
-//     const quizData = await result.json();
-//     showQuestion(quizData.results[0]);
-// }
+socket.on("updateScores", (scores) => {
+    updateScores(scores);
+});
 
+const displayQuestion = (question) => {
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    
+    questionElement.innerText = question.question;
+    optionsElement.innerHTML = "";
 
-// const quizData = [
-//     {
-//         question: "What is the captial of Australia?",
-//         correctAnswer: "Canberra",
-//         options: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
-//     },
-//     {
-//         question: "Which planet is known as the Red Planet?",
-//         correctAnswer: "Mars",
-//         options: ["Earth", "Mars", "Venus", "Jupiter"],
-//     },
-//     {
-//         question:
-//             "Which gas do plants absorb from the atmosphere during photosynthesis?",
-//         correctAnswer: "Carbon Dioxide",
-//         options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
-//     },
-// ];
+    const options = [...question.incorrect_answers, question.correct_answer];
+    options.sort(() => Math.random() - 0.5);
 
+    options.forEach(option => {
+        const optionButton = document.createElement("button");
+        optionButton.innerText = option;
+        optionButton.onclick = () => {
+            socket.emit("submitAnswer", option);
+            disableOptions();
+        };
+        optionsElement.appendChild(optionButton);
+    });
+};
 
+const enableOptions = () => {
+    const optionButtons = document.querySelectorAll("#options button");
+    optionButtons.forEach(button => {
+        button.disabled = false;
+    });
+};
 
-// function showQuestion(quizData) {
-//     questionElement.textContent = quizData.question;
+const disableOptions = () => {
+    const optionButtons = document.querySelectorAll("#options button");
+    optionButtons.forEach(button => {
+        button.disabled = true;
+    });
+};
 
-//     optionsElement.innerHTML = "";
+const updateScores = (scores) => {
+    alert("update scores called")
+};
 
-//     let correctAnswer = quizData.correct_answer;
-//     let incorrectAnswers = quizData.incorrect_answers;
-//     let optionsList = incorrectAnswers;
-
-//     optionsList.splice(
-//         Math.floor(Math.random() * (incorrectAnswers.length + 1)),
-//         0,
-//         correctAnswer
-//     );
-//     for (let i = 0; i < optionsList.length; i++) {
-//         //console.log(questionObj["options"][i]);
-//         const option = document.createElement("button");
-//         option.textContent = optionsList[i];
-//         // Add an event listener
-//         option.addEventListener("click", () => {
-//             checkAnswer(option.textContent, correctAnswer);
-//         });
-//         optionsElement.appendChild(option);
-//     }
-// }
-
-// function checkAnswer(selectedOption, correctAnswer) {
-
-//     if (selectedOption === correctAnswer) {
-//         correct++;
-//         alert("Correct!");
-//     } else {
-//         alert("Incorrect. The correct answer is: " + correctAnswer);
-//     }
-
-//     currentQuestionIndex++;
-
-//     if (currentQuestionIndex < totalQuestions) {
-//         setTimeout(function(){
-//             loadQuestions()
-//         }, 300);
-//     }
-//     else {
-//         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${quizData.length}.`;
-//         optionsElement.innerHTML = "";
-//     }
-// }
-
-// showQuestion(currentQuestionIndex);
+const gameOver = () => {
+    alert(" game over called")
+}

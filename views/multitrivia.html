@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MultiTrivia</title>
-    
 </head>
 <body>
     <h1>MULTITRIVIA PAGE</h1>
-    
-    <script src = "/socket.io/socket.io.js"></script>
-    <script src = "/multitrivia.js"></script>
+    <div>
+        <label for="questionAmount">Number of Questions:</label>
+        <input type="number" id="questionAmount" name="questionAmount" min="1">
+        <button id="startGameButton">Start Game</button>
+    </div>
+    <div id="game">
+        <h2 id="question">Waiting for game to start...</h2>
+        <div id="options"></div>
+    </div>
+    <div id="scores"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/multitrivia.js"></script>
 </body>
 </html>
