@@ -61,6 +61,7 @@ async function loadQuestion() {
     const apiurl = "https://opentdb.com/api.php?amount=30";
     const result = await fetch(apiurl);
     const quizData = await result.json();
+    
     showQuestion(quizData.results[currentQuestionIndex]);
 }
 
