@@ -1,3 +1,4 @@
+
 const questionElement = document.querySelector(".question");
 const optionsElement = document.querySelector(".options");
 const correctScoreElement = document.querySelector(".correct-score");
@@ -7,56 +8,56 @@ let currentQuestionIndex = 0;
 let correct = 0;
 let totalQuestions = 5;
 
-// Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
-    loadQuestion();
     correctScoreElement.textContent = correct;
     totalQuestionsElement.textContent = totalQuestions;
 });
 
-
-function shortQuiz(){
+function shortQuiz() {
     totalQuestions = 5;
-    removeButtons();
+    startQuiz();
 }
 
-function mediumQuiz(){
-    totalQuestions = 15; 
-    removeButtons();
+function mediumQuiz() {
+    totalQuestions = 15;
+    startQuiz();
 }
 
-function longQuiz(){
-    totalQuestions = 30; 
-    removeButtons();
+function longQuiz() {
+    totalQuestions = 30;
+    startQuiz();
 }
 
-function removeButtons(){
-    const shortButton = document.querySelector(".short");
-    const mediumButton = document.querySelector(".medium");
-    const longButton = document.querySelector(".long");
-    shortButton.parentNode.removeChild(shortButton);
-    mediumButton.parentNode.removeChild(mediumButton);
-    longButton.parentNode.removeChild(longButton);
+function startQuiz() {
+    hideQuizLengthButtons();
+    showQuiz();
+    loadQuestionBatch();
+}
 
-    totalQuestionsElement.textContent = totalQuestions;
+function hideQuizLengthButtons() {
+    const buttons = document.querySelectorAll(".short, .medium, .long");
+    buttons.forEach(button => {
+        button.style.display = "none";
+    });
+}
 
+function showQuiz() {
     const userQuestion = document.querySelector(".userQuestion");
-    userQuestion.parentNode.removeChild(userQuestion);
-
-    userQuestion.classList.remove("hidden");
+    userQuestion.classList.add("hidden");
+    const display = document.querySelector(".display");
+    display.classList.remove("hidden");
 }
 
-async function loadQuestion() {
-    const apiurl = "https://opentdb.com/api.php?amount=30";
+async function loadQuestionBatch() {
+    const apiurl = "https://opentdb.com/api.php?amount=" + totalQuestions;
     const result = await fetch(apiurl);
     const quizData = await result.json();
-    
     showQuestion(quizData.results[currentQuestionIndex]);
 }
 
 function showQuestion(quizData) {
-    let questionNumber = currentQuestionIndex+1;
-    questionElement.innerHTML = "#"+questionNumber+ ". " + decodeHtmlEntities(quizData.question);
+    let questionNumber = currentQuestionIndex + 1;
+    questionElement.innerHTML = "#" + questionNumber + ". " + decodeHtmlEntities(quizData.question);
 
     optionsElement.innerHTML = "";
 
@@ -81,38 +82,31 @@ function showQuestion(quizData) {
 }
 
 function checkAnswer(selectedOption, correctAnswer) {
-    // if (selectedOption.textContent === correctAnswer) {
-    //     selectedOption.style.background = "#00FF00";
-    //     correct++;
-    //     correctScoreElement.textContent = correct;
+    optionsElement.querySelectorAll("button").forEach(option => {
+        option.disabled = true; 
 
-    // } else {
-    //     selectedOption.style.background = "#FF0000";
+        if (option.textContent === correctAnswer) {
+            option.style.background = "#00FF00";
+        } else {
+            option.style.background = "#FF0000";
+        }
+    });
 
-    //     alert("Incorrect. The correct answer is: " + correctAnswer);
-    // }
+    if (selectedOption.textContent == correctAnswer) {
+        correct++; 
+    }
 
-   
-        optionsElement.querySelectorAll("button").forEach(option => {
-            if (option.textContent === correctAnswer) {
-                option.style.background = "#00FF00";
-            } else {
-                option.style.background = "#FF0000";
-            }
-            option.disabled = true;
-        });
-
-    currentQuestionIndex++;
+    correctScoreElement.textContent = correct; 
+    currentQuestionIndex++; 
 
     if (currentQuestionIndex < totalQuestions) {
-        setTimeout(function() {
-            loadQuestion();
-        }, 300);
+        loadQuestionBatch(); 
     } else {
         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${totalQuestions}.`;
-        optionsElement.innerHTML = "";
+        optionsElement.innerHTML = ""; 
     }
 }
+
 
 function decodeHtmlEntities(text) {
     const textarea = document.createElement('textarea');
