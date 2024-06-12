@@ -1,0 +1,130 @@
+/* THIS IS NOT WHAT IT WILL ACTUALLY LOOK LIKE!! */
+/* THIS IS JUST A SAMPLE OF WHAT THE CSS COULD LOOK LIKE */
+/* CHANGE WHATEVER YOU WANT  */
+html{
+    background:rgb(#FFFF
+    \\);
+    font-family: 'Jost', sans-serif;
+
+
+}
+
+
+body{
+    background:#30a474;
+    width: 1000;
+    height: 1000 auto;
+    margin: 0 auto;
+    border: 8px solid rgb(255, 255, 255);
+    padding: 0 20px 20px 20px
+
+    
+
+
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 60px;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+}
+
+p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+}
+
+li {
+    font-size:18px;
+    line-height:2;
+    letter-spacing:3px;
+}
+
+.button {
+    font-size:18px;
+    line-height:2;
+    letter-spacing:3px;
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+
+
+}
+
+p.bold{
+    text-decoration:underline;
+}
+
+li.bold{
+
+    font-style:italic;
+
+}
+
+#plug {
+    color:rgb(164, 195, 182)
+
+
+}
+
+.allbtn img {
+    display: block;
+    width: 200px;
+    height: auto;
+    margin: 5px auto;
+    align-items: center;
+    border-color: white;
+    border-radius: 10px;
+    border: 10px;
+}
+
+.button-container-div1 {
+    text-align: center;
+}
+
+.button-container-div1 button{
+    text-align: center;
+    padding: 30px;
+    border: 10px;
+    border-color: white;
+    background-size: 1px;
+    background: none;
+    cursor: pointer;
+}
+
+.button-container-div2 {
+    text-align: center;
+}
+
+.button-container-div2 button{
+    text-align: center;
+    cursor: pointer;
+    padding: 30px;
+    border: 10px;
+    border-color: white;
+    background-size: 1px;
+    background: none;
+}
+
+.home button{
+    text-align: left;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
+.home img {
+    width: 100px;
+    height: 100px;
+}

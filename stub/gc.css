@@ -1,0 +1,74 @@
+html{
+    background:rgb(#FFFF
+    \\);
+    font-family: 'Jost', sans-serif;
+
+}
+
+
+
+body{
+    background:#30a474;
+    border: 8px solid rgb(255, 255, 255);
+    width: 1000;
+    height: auto;
+    margin: 0 auto;
+    border: 8px solid rgb(255, 255, 255);
+    padding: 0 20px 20px 20px
+
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 60px;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+table{
+    width: 700px;
+    height: 50x;
+    background:  rgb(48,164,116);
+    background: rgb(58, 198, 140);
+    font-size: 20px;
+
+}
+
+.home button{
+    text-align: left;
+    width: 100px;
+    height: 100px;
+    height: auto;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
+.home img {
+    width: 100px;
+    height: 100px;
+}
+
+#fullTable {
+    /* align-items: center; */
+    margin: 0 auto;
+
+}
+
+#gradeinputs {
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+
+
+}
+

@@ -1,0 +1,159 @@
+html{
+    background:rgb(#FFFF
+    \\);
+    font-family: 'Jost', sans-serif;
+
+
+}
+
+body{
+    background:#30a474;
+    width: 1000;
+    height:  auto;
+    margin: 0 auto;
+    border: 8px solid rgb(255, 255, 255);
+    padding: 0 20px 20px 20px
+
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 60px;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+}
+
+p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+}
+
+.container{
+    width: 40%;
+    top: 70%;
+    left: 50%;
+    padding-top: 200px;
+    border-radius: 10px;
+    min-width: 450px;
+    position: relative;
+    min-height: 800px;
+    max-height: 801px;
+    transform: translate(-50%,-25%);
+}
+
+
+
+#newtask{
+    position: relative;
+    display: flex;
+    padding: 30px 20px;
+    color: #000000;
+}
+
+#newtask input{
+    width: 75%;
+    height: 45px;
+    padding: 12px;
+    color: #000000;
+    font-weight: 500;
+    position: relative;
+    border-radius: 5px;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    border: 2px solid #d1d3d4;
+}
+
+#newtask input:focus{
+    outline: none;
+    border-color: #000000;
+    color: #000000;
+}
+
+#newtask button{
+    position: relative;
+    float: right;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    outline: none;
+    width: 20%;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-family: 'Jost', sans-serif;
+}
+
+#tasks{
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    padding: 30px 20px;
+    margin-top: 10px;
+    color: #000000;
+}
+
+.task{
+    border-radius: 5px;
+    align-items: center;
+    color: #000000;
+    justify-content: space-between;
+    background-color: #ffffff;
+    height: 50px;
+    width: 550px;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    display: flex;
+}
+
+.task span{
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.task button{
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 100%;
+    width: 50px;
+    border-radius: 5px;
+    border-color: #ffffff;
+}
+
+body.scroll{
+    Width: -5px;
+    Height: -10px;
+  }
+
+
+#taskname {
+    color: #000000;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.home button{
+    text-align: left;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
+.home img {
+    width: 100px;
+    height: 100px;
+}

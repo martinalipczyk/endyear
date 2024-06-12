@@ -1,0 +1,133 @@
+
+html{
+    background:rgb(0, 0, 0);
+    font-family: 'Jost', sans-serif;
+
+
+}
+
+body{
+    background:#30a474;
+    width: 1000;
+    margin: 0 auto;
+    border: 8px solid rgb(255, 255, 255);
+    padding: 0 20px 20px 20px;
+    
+
+}
+
+p {
+
+}
+
+
+
+img {
+    display: block;
+    margin: 0 auto;
+    image-rendering: pixelated;
+}
+
+#countdown {
+    /* background-color: whitesmoke; */
+    font-size:18px;
+    line-height:2;
+    letter-spacing:3px;
+    text-align: center;
+    width: 500;
+    font-family: 'Jost', sans-serif;
+    color: aliceblue;
+    font-size: 40px;
+
+}
+
+.button {
+    background-color: aliceblue;
+    border-radius: 20%;
+    font-family: 'Jost', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    width: 50px;
+}
+
+#home {
+    text-align: center
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 60px;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+li {
+    font-size:18px;
+    line-height:2;
+    letter-spacing:3px;
+    text-align: center;
+}
+
+.button {
+    font-size:18px;
+    line-height:2;
+    letter-spacing:3px;
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+
+
+}
+
+p.bold{
+    text-decoration:underline;
+}
+
+li.bold{
+
+    font-style:italic;
+
+}
+
+#plug {
+    color:rgb(164, 195, 182)
+
+
+}
+
+img {
+    display: block;
+    width: 400px;
+    margin: 0 auto;
+
+
+}
+
+.home button{
+    width: 100px;
+    height: 100px;
+    height: auto;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
+.home img {
+    width: 100px;
+    height: 100px;
+}
+
+#countdown {
+    font-family: 'Jost', sans-serif;
+}

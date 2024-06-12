@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>grade calculator</title>
+    <link  rel="stylesheet" type = "text/css" href="gc.css"/>
+</head>
+
+<body>
+    <div class = "home">
+        <button id = "home" onclick="window.location.href='../stubhome.html'"><img src = "graphics/thestublogo.png"></button>
+    </div>
+    
+    <div>
+        <h1 id = "gcheading">grade calculator</h1>
+    </div>
+    
+    <div>
+        <p id = "gcexpl">use grade calculator to calculate your grades!</p>
+    </div>
+    
+    <br>
+    <div class = "actionbuttons" align = "center">
+        <span class = "rows" align = "center">
+            <button id = "add more rows" onclick="addRows()">add more rows!</button>
+        </span>
+        <span class = "calculate" align = "center">
+            <button id = "calculate!" onclick = "calculate()">calculate!</button>
+        </span>
+        <span class = "clearAll" align = "center">
+            <button id = "clear all!" onclick = "clearAll()">clear all rows!</button>
+        </span>
+    </div>
+    
+    <!-- <div class = "gradetypes">
+        <label>select grade type</label>
+        <div class = "gradetype">   
+        </div>
+    </div> -->
+    <br>
+    <table id = "fullTable" align = "center" >
+        <tbody>
+            <tr id = "options">
+                <td align = "center" >assignment (optional)</td>
+                <td align = "center">grade (%)</td>
+                <td align = "center">weight (%)</td>
+            </tr>
+            <tr id = "gradeinputs">
+                <td align = "center"><input type="text" class = "assignment" placeholder="e.g. Assignment" ></td>
+                <td align = "center" ><input type = "number" class = "grade" ></td>
+                <td align = "center"><input type = "number" class = "weight" ></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h1 id = "finalanswer"></h1>
+    
+
+    <!-- <div class = "button">
+        <button id = "add weight" onclick = "addWeight()"></button>
+        <button id = "add points" onclick = "addPoint()"></button>
+        <button id = "create more rows" onclick = "addRows()"></button>
+        <button id = "clear all" onclick = "clearAll()"></button>
+        <button id = "calculate" onclick = "calculate()"></button>
+    </div> -->
+
+
+</body>
+
+<script src = "gc.js"></script>
+
+</html>
