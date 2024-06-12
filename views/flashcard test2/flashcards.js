@@ -5,7 +5,9 @@ const question = document.getElementById("question");
 const answer = document.getElementById("answer");
 const errorMessage = document.getElementById("error");
 const addQuestion = document.getElementById("add-flashcard");
+const pasteNotes = document.getElementById("paste-notes");
 const closeBtn = document.getElementById("close-btn");
+const closePasteBtn = document.getElementById("close-paste-btn");
 let editBool = false;
 
 //Add question when user clicks 'Add Flashcard' button
@@ -15,6 +17,21 @@ addQuestion.addEventListener("click", () => {
   answer.value = "";
   addQuestionCard.classList.remove("hide");
 });
+
+pasteNotes.addEventListener("click", () => {
+    const notes = prompt("Paste your notes here (separate questions and answers by a colon and each pair by a newline):");
+    if (notes) {
+      const pairs = notes.split('\n');
+      pairs.forEach(pair => {
+        const [q, a] = pair.split(':').map(str => str.trim());
+        if (q && a) {
+          question.value = q;
+          answer.value = a;
+          submitQuestion();
+        }
+      });
+    }
+  });
 
 //Hide Create flashcard Card
 closeBtn.addEventListener(
@@ -28,6 +45,12 @@ closeBtn.addEventListener(
     }
   })
 );
+
+// Hide Paste Notes container
+closePasteBtn.addEventListener("click", () => {
+  container.classList.remove("hide");
+  pasteNotesCard.classList.add("hide");
+});
 
 //Submit Question
 cardButton.addEventListener(
@@ -121,3 +144,33 @@ const disableButtons = (value) => {
     element.disabled = value;
   });
 };
+
+pasteNotes.addEventListener("click", () => {
+    container.classList.add("hide");
+    pasteNotesCard.classList.remove("hide");
+  });
+  
+  // Hide Paste Notes container
+  closePasteBtn.addEventListener("click", () => {
+    container.classList.remove("hide");
+    pasteNotesCard.classList.add("hide");
+  });
+  
+  // Submit Notes
+  submitNotesBtn.addEventListener("click", () => {
+    const notes = notesTextarea.value.trim();
+    if (notes) {
+      const pairs = notes.split('\n');
+      pairs.forEach(pair => {
+        const [q, a] = pair.split(':').map(str => str.trim());
+        if (q && a) {
+          question.value = q;
+          answer.value = a;
+          submitQuestion();
+        }
+      });
+      notesTextarea.value = "";
+      container.classList.remove("hide");
+      pasteNotesCard.classList.add("hide");
+    }
+  });
