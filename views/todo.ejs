@@ -2,56 +2,31 @@
 <html>
 <head>
     <title>to-do list</title>
-    <link  rel="stylesheet" href="/todo.css">
-    
+    <link rel="stylesheet" href="/todo.css">
 </head>
 <body>
+    <div class="home">
+        <button id="home" onclick="window.location.href='/index'">
+            <img src="graphics/thestublogo.png" alt="Home">
+        </button>
+    </div>
 
-  <div class = "home">
-    <button id = "home" onclick="window.location.href='/index'"><img src = "graphics/thestublogo.png"></button>
-  </div>
-
-  <div class = "container">
-    <div>
-
-        <h1>to-do list</h1>
-        <p> organize and assess your tasks</p>
-
-        <div class = "container">
-        <div id = "newtask">
-            <form id = "todoform" action = "/addTask"  method="post">
-                <input class = "input-color" type = "text" id = "txt" placeholder="add tasks">
-            </form>
-            <button class = "btn button-color"id="push" action = "/addTask">add</button>
-         </div>
-        
-
-
-         <!-- <% try { %>
-            <% if (tasks && tasks.length > 0) { %>
-                <% for (let i = 0; i < tasks.length; i++) { %>
-                    <div class="container">
-                        <div class="row">
-                            <span class="col s3 left-align" id="taskname"><%= tasks[i].task_name %></span>
-                            <a href="#" class="col s2 btn right-align offset-s6 delete-task">
-                                <i class="far fa-trash-alt"></i>done
-                            </a>
-                            <p></p>
-                        </div>
-                    </div>
-                <% } %>
-            <% } else { %>
-                <p>not tasks available</p>
-            <% } %>
-        <% } catch (error) { %>
-            <p>error rendering tasks: <%= error.message %></p>
-        <% } %> -->
-        <div id = "tasks">
+    <div class="container">
+        <div>
+            <h1>to-do list</h1>
+            <p>organize and assess your tasks</p>
+            <div class="container">
+                <div id="newtask">
+                    <!-- <form id="todoform" action="/addTask" method="post"> -->
+                        <input class="input-color" type="text" id="txt" placeholder="add tasks">
+                    <!-- </form> -->
+                    <button class="btn button-color" id="push">add</button>
+                </div>
+                <div id="tasks"></div>
+            </div>
         </div>
     </div>
-</body>
 
+    <script src="todo.js"></script>
 </body>
-
-<script src = "todo.js"></script>
 </html>
