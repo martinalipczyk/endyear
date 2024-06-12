@@ -14,10 +14,10 @@ function toggleMusic() {
     
     if (music.paused) {
         music.play();
-        musicToggle.textContent = 'Turn Music Off';
+        musicToggle.innerHTML = '<i class="material-icons">pause_circle_filled</i>';
     } else {
         music.pause();
-        musicToggle.textContent = 'Turn Music On';
+        musicToggle.innerHTML = '<i class="material-icons">play_circle_filled</i>';
     }
 }
 // Event Listeners
