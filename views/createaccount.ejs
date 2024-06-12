@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="/styling.css"> -->
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>create your account</title>
+</head>
+<body>
+    <form method = "post" id="registrationForm" action="/register" >
+        <div class = container>
+            <h1>create your account</h1>
+            <label for = "firstname">what's your first name?</label>
+            <input type = "text" name = "first_name" placeholder = "Spongebob" required>
+            <br>
+            <label for = "lastname">what's your last name?</label>
+            <input type = "text" name = "last_name" placeholder = "Squarepants" required>
+            <br>
+            <label for = "username">choose your username.</label>
+            <input type = "text" name = "username" minlength = "6" placeholder = "Spongebob" required>
+            <br>
+            <label for = "password">choose your password.</label>
+            <input type = "password" name = "password" minlength = "6" placeholder = "Spongebob" required>
+            <br>
+            
+            <label for = "email">email:</label>
+            <input type = "email" name = "email" placeholder = "squarepants@gmail.com">
+
+            <input type = "submit" a href = "#" class = "btn"></a>
+            <input type = "reset" a href = "#" class = "btn"></a>
+
+        </div>
+
+    </form>
+</body>
+</html>

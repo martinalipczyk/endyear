@@ -11,10 +11,13 @@ app.use(express.static("views"));
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
 
+let userna = null;
+let userid = null;
+
 server.listen(port, () => console.log(`App server listening on ${port}. (Go to http://localhost:${port})`));
 
 app.get("/", (req, res) => {
-    res.render("index", {user_id: userid, username: userna});
+    res.render("login", {user_id: userid, username: userna});
 });
 
 app.get("/databases", (req, res) => {
@@ -63,6 +66,10 @@ app.get("/triviaselect", (req, res) => {
 
 app.get("/uploadnotes", (req, res) => {
     res.render("uploadnotes", {user_id: userid, username: userna});
+})
+
+app.get("/createaccount", (req, res) => {
+    res.render("createaccount", {user_id: userid, username: userna});
 })
 
 
