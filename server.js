@@ -7,6 +7,8 @@ const app = express();
 const port = 3000 || process.env.PORT;
 const server = http.createServer(app);
 
+app.use(express.static(__dirname + "/public"));
+
 app.use(express.static("views"));
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
@@ -82,6 +84,6 @@ server.listen(port, () => console.log(`App server listening on ${port}. (Go to h
 // };
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/views/stubhome.html");
+    res.render("index");
 });
 
