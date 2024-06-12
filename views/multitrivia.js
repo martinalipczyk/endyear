@@ -31,14 +31,6 @@ socket.on("updateScores", (scores) => {
     updateScores(scores);
 });
 
-// Receive local IP address from the server
-socket.on("localIp", (ip) => {
-    localIp = ip;
-    console.log("Local IP Address: ", localIp);
-    // Connect to other players on the same WiFi
-    connectToPeers();
-});
-
 const displayQuestion = (question) => {
     const questionElement = document.getElementById("question");
     const optionsElement = document.getElementById("options");
@@ -125,3 +117,11 @@ const connectToPeers = () => {
         });
     }
 };
+
+// Receive local IP address from the server
+socket.on("localIp", (ip) => {
+    localIp = ip;
+    console.log("Local IP Address: ", localIp);
+    // Connect to other players on the same WiFi
+    connectToPeers();
+});

@@ -33,10 +33,6 @@ io.on("connection", (socket) => {
     players.push(socket.id);
     scores[socket.id] = { correct: 0, wrong: 0 };
 
-    // emit ip to client
-    const localIp = getLocalIpAddress();
-    socket.emit('localIp', localIp);
-
     socket.emit('serverToClient', 'test: hello client');
 
     socket.on('clientToServer', (data) => {
@@ -67,6 +63,19 @@ io.on("connection", (socket) => {
             io.emit("wrongAnswer", scores[socket.id]);
         }
         nextQuestion();
+    });
+
+    // WebRTC signaling handlers
+    socket.on('offer', (offer) => {
+        socket.broadcast.emit('offer', offer);
+    });
+
+    socket.on('answer', (answer) => {
+        socket.broadcast.emit('answer', answer);
+    });
+
+    socket.on('iceCandidate', (candidate) => {
+        socket.broadcast.emit('iceCandidate', candidate);
     });
 });
 
