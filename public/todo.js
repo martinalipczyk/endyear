@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', fetchUserTasks);
 
 document.querySelector('#push').onclick = function (event) {
-    // event.preventDefault(); // Prevent form submission to avoid page reload
+    event.preventDefault(); // Prevent form submission to avoid page reload
     const taskName = document.querySelector('#txt').value;
 
     if (taskName.length === 0) {
@@ -10,6 +10,7 @@ document.querySelector('#push').onclick = function (event) {
         console.log(taskName);
 
         document.querySelector('#tasks').innerHTML += `
+        
             <div class="container">
                 <div class="row">
                     <span class="col s3 left-align" id="taskname">${taskName}</span>

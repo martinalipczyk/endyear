@@ -10,7 +10,7 @@ async function summarizeNotes() {
     summaryOutput.textContent = "Summarizing...";
 
     try {
-        const response = await fetch('http://localhost:3000/summarize', {
+        const response = await fetch('http://localhost:3001/summarize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
