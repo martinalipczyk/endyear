@@ -8,6 +8,8 @@ const addTerm = document.getElementById("add-flashcard");
 const closeBtn = document.getElementById("close-btn");
 let editBool = false;
 
+const flashcardMap = new Map(); // Initialize a Map to store the flashcards
+
 // Add term when user clicks 'Add Flashcard' button
 addTerm.addEventListener("click", () => {
   container.classList.add("hide");
@@ -75,9 +77,13 @@ addNotesButton.addEventListener("click", () => {
 
     deleteButton.addEventListener('click', () => {
       cardDiv.remove();
+      flashcardMap.delete(key); // Remove the flashcard from the map
+      logFlashcards(); // Log all flashcards after deletion
     });
 
     cardContainer.appendChild(cardDiv);
+    flashcardMap.set(key, value); // Add the flashcard to the map
+    logFlashcards(); // Log all flashcards
   });
 });
 
@@ -154,6 +160,8 @@ function generateCard(termValue, definValue) {
 
   cardDiv.appendChild(buttonsCon);
   cardListContainer.appendChild(cardDiv);
+  flashcardMap.set(termValue, definValue); // Add the flashcard to the map
+  logFlashcards(); // Log all flashcards
   hideTerm();
 }
 
@@ -168,6 +176,8 @@ const modifyElement = (element, edit = false) => {
     disableButtons(true);
   }
   parentDiv.remove();
+  flashcardMap.delete(parentTerm); // Remove the flashcard from the map
+  logFlashcards(); // Log all flashcards after removal
 };
 
 // Disable edit and delete buttons
@@ -177,3 +187,11 @@ const disableButtons = (value) => {
     element.disabled = value;
   });
 };
+
+// Log all flashcards in the map
+function logFlashcards() {
+  console.log("Current Flashcards:");
+  flashcardMap.forEach((value, key) => {
+    console.log(`Term: ${key}, Definition: ${value}`);
+  });
+}
