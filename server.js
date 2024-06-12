@@ -2,12 +2,14 @@ const express = require("express");
 // const socket = require("socket.io");
 const http = require("http");
 const axios = require("axios");
-
+const db = require('./db/db_connection.js');
 const app = express();
 const port = 3000 || process.env.PORT;
 const server = http.createServer(app);
 
 app.use(express.static("views"));
+app.set( "views",  __dirname + "/views");
+app.set( "view engine", "ejs" );
 
 // const io = socket(server);
 
@@ -80,5 +82,6 @@ server.listen(port, () => console.log(`App server listening on ${port}. (Go to h
 // };
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/views/multitrivia.html");
+    res.sendFile(__dirname + "/views/stubhome.html");
 });
+
