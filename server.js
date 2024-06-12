@@ -12,6 +12,8 @@ app.use(express.static("views"));
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
 
+app.use(express.json()); // Add this line to parse JSON payloads
+
 let userna = null;
 let userid = null;
 
@@ -124,14 +126,14 @@ app.post('/dologin', (req, res) => {
 });
 
 app.post('/deleteTask', (req, res) => {
-    const { taskName } = req.body; 
+    const { task_name } = req.body;
 
     if (!userid) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
     const deleteTaskQuery = 'DELETE FROM tasks WHERE task_name = ? AND user_id = ?';
-    db.query(deleteTaskQuery, [taskName, userid], (deleteErr, deleteResults) => {
+    db.query(deleteTaskQuery, [task_name, userid], (deleteErr, deleteResults) => {
         if (deleteErr) {
             console.error('Error deleting task: ' + deleteErr.message);
             return res.status(500).json({ error: 'Internal Server Error' });
@@ -147,21 +149,23 @@ app.post('/deleteTask', (req, res) => {
 
 
 
-app.post('/addTask', (req, res) => {
-    const { taskName } = req.body;
 
-    if (!taskName || taskName.trim() === '') {
+app.post('/addTask', (req, res) => {
+    console.log("req.body is " +req.body);
+    const { task_name } = req.body;
+
+    if (!task_name || task_name.trim() === '') {
         return res.status(400).json({ error: 'Task name cannot be empty' });
     }
 
-    console.log('Received taskName:', taskName);
+    console.log('Received taskName:', task_name);
     const insertTaskQuery = 'INSERT INTO tasks (user_id, task_name) VALUES (?, ?)';
-    db.query(insertTaskQuery, [userid, taskName], (insertErr, insertResults) => {
+    db.query(insertTaskQuery, [userid, task_name], (insertErr, insertResults) => {
         if (insertErr) {
             console.error('Error saving task: ' + insertErr.message);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
-        console.log('Received taskName:', taskName);
+        console.log('Received taskName:', task_name);
         res.status(200).json({ message: 'Task saved successfully' });
     });
 });
