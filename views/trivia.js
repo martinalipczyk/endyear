@@ -8,6 +8,18 @@ let correct = 0;
 let totalQuestions = 5;
 let choseLength = false;
 
+function toggleMusic() {
+    var music = document.getElementById('bgMusic');
+    var musicToggle = document.getElementById('musicToggle');
+    
+    if (music.paused) {
+        music.play();
+        musicToggle.textContent = 'Turn Music Off';
+    } else {
+        music.pause();
+        musicToggle.textContent = 'Turn Music On';
+    }
+}
 // Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
     loadQuestion();

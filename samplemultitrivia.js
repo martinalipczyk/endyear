@@ -1,3 +1,5 @@
+// multitrivia.js
+
 const socket = io.connect("http://localhost:3000");
 
 document.getElementById("startGameButton").onclick = () => {
@@ -14,16 +16,12 @@ socket.on("newQuestion", (question) => {
     enableOptions();
 });
 
-socket.on("correctAnswer", (score) => {
-    updateScores(score);
+socket.on("correctAnswer", (scores) => {
+    updateScores(scores);
 });
 
-socket.on("wrongAnswer", (score) => {
-    updateScores(score);
-});
-
-socket.on("gameOver", () => {
-    gameOver();
+socket.on("wrongAnswer", (scores) => {
+    updateScores(scores);
 });
 
 socket.on("updateScores", (scores) => {
@@ -54,7 +52,6 @@ const displayQuestion = (question) => {
     });
 };
 
-
 const enableOptions = () => {
     const optionButtons = document.querySelectorAll("#options button");
     optionButtons.forEach(button => {
@@ -62,24 +59,12 @@ const enableOptions = () => {
     });
 };
 
-const disableOptions = () => {
-    const optionButtons = document.querySelectorAll("#options button");
-    optionButtons.forEach(button => {
-        button.disabled = true;
-    });
-};
-
 const updateScores = (scores) => {
-    alert("update scores called")
+    const scoresElement = document.getElementById("scores");
+    scoresElement.innerHTML = "<h3>Scores</h3>";
+    for (const [playerId, score] of Object.entries(scores)) {
+        const playerScoreElement = document.createElement("p");
+        playerScoreElement.textContent = `Player ${playerId}: ${score}`;
+        scoresElement.appendChild(playerScoreElement);
+    }
 };
-
-const gameOver = () => {
-    alert(" game over called")
-}
-
-function decodeHtmlEntities(text) {
-    const textarea = document.createElement('textarea');
-    textarea.innerHTML = text;
-    return textarea.value;
-}
-
