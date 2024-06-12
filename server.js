@@ -2,6 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 const http = require("http");
 const axios = require("axios");
+const os = require("os");
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -14,7 +15,7 @@ const io = socket(server);
 server.listen(port, () => console.log(`App server listening on ${port}. (Go to http://localhost:${port})`));
 
 let players = [];
-let questionIndex = 0;
+let index = 0;
 let questions = [];
 let scores = {};
 
@@ -23,7 +24,7 @@ const getQuestions = async (amount) => {
         const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&type=multiple`);
         questions = response.data.results;
     } catch (error) {
-        console.error("Error fetching questions: ", error);
+        console.error("error fetching questions: ", error);
     }
 };
 
@@ -32,7 +33,7 @@ io.on("connection", (socket) => {
     players.push(socket.id);
     scores[socket.id] = { correct: 0, wrong: 0 };
 
-    socket.emit('serverToClient', 'Hello client');
+    socket.emit('serverToClient', 'test: hello client');
 
     socket.on('clientToServer', (data) => {
         console.log(data);
@@ -52,7 +53,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("submitAnswer", (answer) => {
-        if (questions[questionIndex].correct_answer === answer) {
+        if (questions[index].correct_answer === answer) {
             scores[socket.id].correct++;
             io.emit("updateScores", scores);
             io.emit("correctAnswer", scores[socket.id]);
@@ -63,17 +64,30 @@ io.on("connection", (socket) => {
         }
         nextQuestion();
     });
+
+    // WebRTC signaling handlers
+    socket.on('offer', (offer) => {
+        socket.broadcast.emit('offer', offer);
+    });
+
+    socket.on('answer', (answer) => {
+        socket.broadcast.emit('answer', answer);
+    });
+
+    socket.on('iceCandidate', (candidate) => {
+        socket.broadcast.emit('iceCandidate', candidate);
+    });
 });
 
 const startGame = () => {
-    questionIndex = 0;
-    io.emit("startGame", questions[questionIndex]);
+    index = 0;
+    io.emit("startGame", questions[index]);
 };
 
 const nextQuestion = () => {
-    questionIndex++;
-    if (questionIndex < questions.length) {
-        io.emit("newQuestion", questions[questionIndex]);
+    index++;
+    if (index < questions.length) {
+        io.emit("newQuestion", questions[index]);
     } else {
         io.emit("gameOver");
     }
@@ -82,3 +96,16 @@ const nextQuestion = () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/multitrivia.html");
 });
+
+function getLocalIpAddress() {
+    const interfaces = os.networkInterfaces();
+    for (let iface in interfaces) {
+        for (let i = 0; i < interfaces[iface].length; i++) {
+            const address = interfaces[iface][i];
+            if (address.family === 'IPv4' && !address.internal) {
+                return address.address;
+            }
+        }
+    }
+    return null;
+}
