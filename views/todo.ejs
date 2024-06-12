@@ -11,27 +11,46 @@
     <button id = "home" onclick="window.location.href='/index'"><img src = "graphics/thestublogo.png"></button>
   </div>
 
-  <div>
-    <h1 id="mpheading">to-do list</h1>
-  </div>
-
-  <div>
-    <p id = "todosub">keep track of your tasks!</p>
-  </div>
-
-  <div>
-    <p id="jspp"></p>
-  </div>
-
   <div class = "container">
-    <div id = "newtask">
-      <input type = "text" id = "textplace" placeholder="add tasks">
-      <button id="push">add</button>
-    </div>
-    
-  <div id = "tasks">
+    <div>
+        <h1>to-do list</h1>
+        <p> organize and assess your tasks</p>
+        
 
-  </div>
+        <div class = "container">
+        <div id = "newtask">
+            <div class = "custom-margin">
+                <input class = "input-color" type = "text" id = "txt" placeholder="add tasks">
+            </div>
+            <button class = "btn button-color"id="push">add</button>
+         </div>
+
+         <!-- <% try { %>
+            <% if (tasks && tasks.length > 0) { %>
+                <% for (let i = 0; i < tasks.length; i++) { %>
+                    <div class="container">
+                        <div class="row">
+                            <span class="col s3 left-align" id="taskname"><%= tasks[i].task_name %></span>
+                            <a href="#" class="col s2 btn right-align offset-s6 delete-task">
+                                <i class="far fa-trash-alt"></i>done
+                            </a>
+                            <p></p>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p>not tasks available</p>
+            <% } %>
+        <% } catch (error) { %>
+            <p>error rendering tasks: <%= error.message %></p>
+        <% } %> -->
+
+            
+        <div id = "tasks">
+        
+        </div>
+    </div>
+</body>
   
 
 </body>
