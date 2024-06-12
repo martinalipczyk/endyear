@@ -1,4 +1,3 @@
-
 const questionElement = document.querySelector(".question");
 const optionsElement = document.querySelector(".options");
 const correctScoreElement = document.querySelector(".correct-score");
@@ -7,57 +6,63 @@ const totalQuestionsElement = document.querySelector(".total-questions");
 let currentQuestionIndex = 0;
 let correct = 0;
 let totalQuestions = 5;
+let choseLength = false;
 
+// Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
+    loadQuestion();
     correctScoreElement.textContent = correct;
     totalQuestionsElement.textContent = totalQuestions;
 });
 
-function shortQuiz() {
+
+function shortQuiz(){
     totalQuestions = 5;
-    startQuiz();
+    removeButtons();
 }
 
-function mediumQuiz() {
-    totalQuestions = 15;
-    startQuiz();
+function mediumQuiz(){
+    totalQuestions = 15; 
+    removeButtons();
 }
 
-function longQuiz() {
-    totalQuestions = 30;
-    startQuiz();
+function longQuiz(){
+    totalQuestions = 30; 
+    removeButtons();
 }
 
-function startQuiz() {
-    hideQuizLengthButtons();
-    showQuiz();
-    loadQuestionBatch();
-}
+function removeButtons(){
+    const shortButton = document.querySelector(".short");
+    const mediumButton = document.querySelector(".medium");
+    const longButton = document.querySelector(".long");
+    shortButton.parentNode.removeChild(shortButton);
+    mediumButton.parentNode.removeChild(mediumButton);
+    longButton.parentNode.removeChild(longButton);
 
-function hideQuizLengthButtons() {
-    const buttons = document.querySelectorAll(".short, .medium, .long");
-    buttons.forEach(button => {
-        button.style.display = "none";
-    });
-}
+    totalQuestionsElement.textContent = totalQuestions;
 
-function showQuiz() {
     const userQuestion = document.querySelector(".userQuestion");
-    userQuestion.classList.add("hidden");
-    const display = document.querySelector(".display");
-    display.classList.remove("hidden");
+    userQuestion.parentNode.removeChild(userQuestion);
+
+    userQuestion.classList.remove("hidden");
+    choseLength = true;
+    loadQuestion();
 }
 
-async function loadQuestionBatch() {
-    const apiurl = "https://opentdb.com/api.php?amount=" + totalQuestions;
-    const result = await fetch(apiurl);
-    const quizData = await result.json();
-    showQuestion(quizData.results[currentQuestionIndex]);
+async function loadQuestion() {
+    if(choseLength==true){
+        const apiurl = "https://opentdb.com/api.php?amount=30";
+        const result = await fetch(apiurl);
+        const quizData = await result.json();
+        
+        showQuestion(quizData.results[currentQuestionIndex]);
+    }
+    
 }
 
 function showQuestion(quizData) {
-    let questionNumber = currentQuestionIndex + 1;
-    questionElement.innerHTML = "#" + questionNumber + ". " + decodeHtmlEntities(quizData.question);
+    let questionNumber = currentQuestionIndex+1;
+    questionElement.innerHTML = "#"+questionNumber+ ". " + decodeHtmlEntities(quizData.question);
 
     optionsElement.innerHTML = "";
 
@@ -82,31 +87,44 @@ function showQuestion(quizData) {
 }
 
 function checkAnswer(selectedOption, correctAnswer) {
-    optionsElement.querySelectorAll("button").forEach(option => {
-        option.disabled = true; 
+    // if (selectedOption.textContent === correctAnswer) {
+    //     selectedOption.style.background = "#00FF00";
+    //     correct++;
+    //     correctScoreElement.textContent = correct;
 
-        if (option.textContent === correctAnswer) {
-            option.style.background = "#00FF00";
-        } else {
-            option.style.background = "#FF0000";
+    // } else {
+    //     selectedOption.style.background = "#FF0000";
+
+    //     alert("Incorrect. The correct answer is: " + correctAnswer);
+    // }
+        correctAnswer=decodeHtmlEntities(correctAnswer);
+   
+        optionsElement.querySelectorAll("button").forEach(option => {
+            if (option.textContent === correctAnswer) {
+                option.style.background = "#00FF00";
+                
+            } else {
+                option.style.background = "#FF0000";
+            }
+            // option.disabled = true;
+        });
+        if(selectedOption.textContent == correctAnswer){
+            correct++;
         }
-    });
+        correctScoreElement.textContent = correct; 
 
-    if (selectedOption.textContent == correctAnswer) {
-        correct++; 
-    }
 
-    correctScoreElement.textContent = correct; 
-    currentQuestionIndex++; 
+    currentQuestionIndex++;
 
     if (currentQuestionIndex < totalQuestions) {
-        loadQuestionBatch(); 
+        setTimeout(function() {
+            loadQuestion();
+        }, 300);
     } else {
         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${totalQuestions}.`;
-        optionsElement.innerHTML = ""; 
+        optionsElement.innerHTML = "";
     }
 }
-
 
 function decodeHtmlEntities(text) {
     const textarea = document.createElement('textarea');
