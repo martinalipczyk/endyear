@@ -85,3 +85,50 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/stubhome.html");
 });
 
+app.get("/databases", (req, res) => {
+    res.render("databases");
+})
+
+app.get("/gc", (req, res) => {
+    res.render("gc");
+})
+
+app.get("/index", (req, res) => {
+    res.render("index");
+})
+
+app.get("/linkhub", (req, res) => {
+    res.render("linkhub");
+})
+
+app.get("/multitrivia", (req, res) => {
+    res.render("multitrivia");
+})
+
+app.get("/pomodoro", (req, res) => {
+    res.render("pomodoro");
+})
+
+app.get("/solo_trivia", (req, res) => {
+    res.render("solo_trivia");
+})
+
+app.get("/summarize", (req, res) => {
+    res.render("summarize");
+})
+
+app.get("/test", (req, res) => {
+    res.render("test");
+})
+
+app.get("/todo", (req, res) => {
+    res.render("todo");
+})
+
+app.get("/triviaselect", (req, res) => {
+    res.render("triviaselect");
+})
+
+app.get("/uploadnotes", (req, res) => {
+    res.render("uploadnotes");
+})
