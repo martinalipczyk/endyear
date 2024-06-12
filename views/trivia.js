@@ -6,6 +6,7 @@ const totalQuestionsElement = document.querySelector(".total-questions");
 let currentQuestionIndex = 0;
 let correct = 0;
 let totalQuestions = 5;
+let choseLength = false;
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", function() {
@@ -18,20 +19,16 @@ document.addEventListener("DOMContentLoaded", function() {
 function shortQuiz(){
     totalQuestions = 5;
     removeButtons();
-
-
 }
 
 function mediumQuiz(){
     totalQuestions = 15; 
     removeButtons();
-
 }
 
 function longQuiz(){
     totalQuestions = 30; 
     removeButtons();
-
 }
 
 function removeButtons(){
@@ -48,25 +45,24 @@ function removeButtons(){
     userQuestion.parentNode.removeChild(userQuestion);
 
     userQuestion.classList.remove("hidden");
-
-
-
-
-
-
-
+    choseLength = true;
+    loadQuestion();
 }
 
 async function loadQuestion() {
-    const apiurl = "https://opentdb.com/api.php?amount=30";
-    const result = await fetch(apiurl);
-    const quizData = await result.json();
-    showQuestion(quizData.results[currentQuestionIndex]);
+    if(choseLength==true){
+        const apiurl = "https://opentdb.com/api.php?amount=30";
+        const result = await fetch(apiurl);
+        const quizData = await result.json();
+        
+        showQuestion(quizData.results[currentQuestionIndex]);
+    }
+    
 }
 
 function showQuestion(quizData) {
     let questionNumber = currentQuestionIndex+1;
-    questionElement.textContent = "#"+questionNumber+ ". " + quizData.question;
+    questionElement.innerHTML = "#"+questionNumber+ ". " + decodeHtmlEntities(quizData.question);
 
     optionsElement.innerHTML = "";
 
@@ -81,23 +77,42 @@ function showQuestion(quizData) {
     );
     for (let i = 0; i < optionsList.length; i++) {
         const option = document.createElement("button");
-        option.textContent = optionsList[i];
+        option.innerHTML = decodeHtmlEntities(optionsList[i]);
         // Add an event listener
         option.addEventListener("click", () => {
-            checkAnswer(option.textContent, correctAnswer);
+            checkAnswer(option, correctAnswer);
         });
         optionsElement.appendChild(option);
     }
 }
 
 function checkAnswer(selectedOption, correctAnswer) {
-    if (selectedOption === correctAnswer) {
-        correct++;
-        correctScoreElement.textContent = correct;
-        alert("Correct!");
-    } else {
-        alert("Incorrect. The correct answer is: " + correctAnswer);
-    }
+    // if (selectedOption.textContent === correctAnswer) {
+    //     selectedOption.style.background = "#00FF00";
+    //     correct++;
+    //     correctScoreElement.textContent = correct;
+
+    // } else {
+    //     selectedOption.style.background = "#FF0000";
+
+    //     alert("Incorrect. The correct answer is: " + correctAnswer);
+    // }
+        correctAnswer=decodeHtmlEntities(correctAnswer);
+   
+        optionsElement.querySelectorAll("button").forEach(option => {
+            if (option.textContent === correctAnswer) {
+                option.style.background = "#00FF00";
+                
+            } else {
+                option.style.background = "#FF0000";
+            }
+            // option.disabled = true;
+        });
+        if(selectedOption.textContent == correctAnswer){
+            correct++;
+        }
+        correctScoreElement.textContent = correct; 
+
 
     currentQuestionIndex++;
 
@@ -109,4 +124,10 @@ function checkAnswer(selectedOption, correctAnswer) {
         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${totalQuestions}.`;
         optionsElement.innerHTML = "";
     }
+}
+
+function decodeHtmlEntities(text) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
 }
