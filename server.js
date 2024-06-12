@@ -2,7 +2,6 @@ const express = require("express");
 const socket = require("socket.io");
 const http = require("http");
 const axios = require("axios");
-const os = require("os");
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -64,19 +63,6 @@ io.on("connection", (socket) => {
         }
         nextQuestion();
     });
-
-    // WebRTC signaling handlers
-    socket.on('offer', (offer) => {
-        socket.broadcast.emit('offer', offer);
-    });
-
-    socket.on('answer', (answer) => {
-        socket.broadcast.emit('answer', answer);
-    });
-
-    socket.on('iceCandidate', (candidate) => {
-        socket.broadcast.emit('iceCandidate', candidate);
-    });
 });
 
 const startGame = () => {
@@ -96,16 +82,3 @@ const nextQuestion = () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/multitrivia.html");
 });
-
-function getLocalIpAddress() {
-    const interfaces = os.networkInterfaces();
-    for (let iface in interfaces) {
-        for (let i = 0; i < interfaces[iface].length; i++) {
-            const address = interfaces[iface][i];
-            if (address.family === 'IPv4' && !address.internal) {
-                return address.address;
-            }
-        }
-    }
-    return null;
-}
