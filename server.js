@@ -102,9 +102,6 @@ app.post('/register', (req, res) => {
         });
     });
 });
-
-
-
   
 app.post('/dologin', (req, res) => {
     const { username, password } = req.body;
@@ -126,6 +123,7 @@ app.post('/dologin', (req, res) => {
     });
 });
 
+
 app.post('/addTask', (req, res) => {
     const { taskName } = req.body;
 
@@ -141,7 +139,6 @@ app.post('/addTask', (req, res) => {
             return res.status(500).json({ error: 'Internal Server Error' });
         }
         console.log('Received taskName:', taskName);
-        res.status(200).json({ message: 'Task saved successfully' });
     });
 });
 

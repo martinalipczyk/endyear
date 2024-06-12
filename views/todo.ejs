@@ -9,44 +9,19 @@
 
   <div class = "home">
     <button id = "home" onclick="window.location.href='/index'"><img src = "graphics/thestublogo.png"></button>
-    <div class = "userInfo">
-        <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out of <%=username%></button>
-        <script>
-            document.getElementById("logoutBtn").addEventListener("click", function() {
-                // Make an AJAX request to the logout route
-                fetch("/logout", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then(response => {
-                    if (response.redirected) {
-                        // Redirect the user to the login page
-                        window.location.href = response.url;
-                    }
-                })
-                .catch(error => {
-                    console.error("Error logging out:", error);
-                    // Handle error
-                });
-            });
-            </script>
-            
-        </div>
-</div>
+  </div>
 
   <div class = "container">
     <div>
+
         <h1>to-do list</h1>
         <p> organize and assess your tasks</p>
-        
 
         <div class = "container">
         <div id = "newtask">
-            <div class = "custom-margin">
+            <form id = "todoform" action = "/addTask"  method="post">
                 <input class = "input-color" type = "text" id = "txt" placeholder="add tasks">
-            </div>
+            </form>
             <button class = "btn button-color"id="push">add</button>
          </div>
 
@@ -69,17 +44,12 @@
         <% } catch (error) { %>
             <p>error rendering tasks: <%= error.message %></p>
         <% } %> -->
-
-            
         <div id = "tasks">
-        
         </div>
     </div>
 </body>
-  
 
 </body>
 
 <script src = "todo.js"></script>
-
 </html>
