@@ -123,3 +123,8 @@ footer button{
     border: 2px white;
     text-align: center;
 }
+
+.userInfo{
+    display: flex;
+    justify-content: space-between;
+}

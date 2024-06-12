@@ -4,15 +4,43 @@
 
 <head>
     <title>stub web</title>
+       <!-- Compiled and minified CSS -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="/index.css">
+    
 </head>
 
 <body>
 
-    <div>
-        <p style = "text-align: left;">Welcome, <%=username%>!</p>
-        <button onclick = ""style = "text-align: right;">Log Out</button>
-    </div>
+    <div class = "userInfo">
+        <p style = "text-align: right;">Welcome, <%=username%>!</p>
+        <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out</button>
+        <script>
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                // Make an AJAX request to the logout route
+                fetch("/logout", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        // Redirect the user to the login page
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error logging out:", error);
+                    // Handle error
+                });
+            });
+            </script>
+            
+        </div>
     
     <div>
         <h1 id="mpheading"><img src = "/graphics/thestublogo.png"></h1>
@@ -60,6 +88,8 @@
     <p>thank you for using stub :) - Martina Lipczyk, Liam Strauser, Mia Subrahmanyam, & Yuto Takeda</p>
     
 </footer>
+
+
 
 <script> src="stubhome.js"</script>
 

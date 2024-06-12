@@ -185,3 +185,12 @@ app.get('/getUserTasks', (req, res) => {
         res.json({ tasks: tasks });
     });
 });
+
+// Add a route for handling logout requests
+app.get("/logout", (req, res) => {
+    // Clear user session or authentication token
+    userid = null;
+    userna = null;
+    // Redirect the user to the login page
+    res.redirect("/");
+});

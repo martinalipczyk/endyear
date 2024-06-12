@@ -131,3 +131,8 @@ img {
 #countdown {
     font-family: 'Jost', sans-serif;
 }
+
+.home{
+    display: flex;
+    justify-content: space-between;
+}

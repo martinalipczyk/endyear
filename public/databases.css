@@ -142,3 +142,8 @@ li.bold{
     width: 100px;
     height: 100px;
 }
+
+.home {
+    display: flex;
+    justify-content: space-between;
+}
