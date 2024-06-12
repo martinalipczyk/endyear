@@ -14,7 +14,7 @@ const io = socket(server);
 server.listen(port, () => console.log(`App server listening on ${port}. (Go to http://localhost:${port})`));
 
 let players = [];
-let questionIndex = 0;
+let index = 0;
 let questions = [];
 let scores = {};
 
@@ -23,7 +23,7 @@ const getQuestions = async (amount) => {
         const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&type=multiple`);
         questions = response.data.results;
     } catch (error) {
-        console.error("Error fetching questions: ", error);
+        console.error("error fetching questions: ", error);
     }
 };
 
@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
     players.push(socket.id);
     scores[socket.id] = { correct: 0, wrong: 0 };
 
-    socket.emit('serverToClient', 'Hello client');
+    socket.emit('serverToClient', 'test: hello client');
 
     socket.on('clientToServer', (data) => {
         console.log(data);
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("submitAnswer", (answer) => {
-        if (questions[questionIndex].correct_answer === answer) {
+        if (questions[index].correct_answer === answer) {
             scores[socket.id].correct++;
             io.emit("updateScores", scores);
             io.emit("correctAnswer", scores[socket.id]);
@@ -66,14 +66,14 @@ io.on("connection", (socket) => {
 });
 
 const startGame = () => {
-    questionIndex = 0;
-    io.emit("startGame", questions[questionIndex]);
+    index = 0;
+    io.emit("startGame", questions[index]);
 };
 
 const nextQuestion = () => {
-    questionIndex++;
-    if (questionIndex < questions.length) {
-        io.emit("newQuestion", questions[questionIndex]);
+    index++;
+    if (index < questions.length) {
+        io.emit("newQuestion", questions[index]);
     } else {
         io.emit("gameOver");
     }
