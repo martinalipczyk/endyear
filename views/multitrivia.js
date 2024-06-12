@@ -1,4 +1,5 @@
 const socket = io.connect("http://localhost:3000");
+let localIp;
 
 document.getElementById("startGameButton").onclick = () => {
     const questionAmount = document.getElementById("questionAmount").value;
@@ -28,6 +29,14 @@ socket.on("gameOver", () => {
 
 socket.on("updateScores", (scores) => {
     updateScores(scores);
+});
+
+// Receive local IP address from the server
+socket.on("localIp", (ip) => {
+    localIp = ip;
+    console.log("Local IP Address: ", localIp);
+    // Connect to other players on the same WiFi
+    connectToPeers();
 });
 
 const displayQuestion = (question) => {
@@ -66,9 +75,53 @@ const disableOptions = () => {
 };
 
 const updateScores = (scores) => {
-    alert("update scores called")
+    alert("update scores called");
 };
 
 const gameOver = () => {
-    alert(" game over called")
-}
+    alert("game over called");
+};
+
+// WebRTC setup for peer-to-peer connection
+const connectToPeers = () => {
+    const peerConnection = new RTCPeerConnection();
+    const dataChannel = peerConnection.createDataChannel("gameDataChannel");
+
+    dataChannel.onopen = () => {
+        console.log("Data channel is open");
+    };
+
+    dataChannel.onmessage = (event) => {
+        console.log("Message from peer: ", event.data);
+        // Handle game data exchange between peers
+    };
+
+    peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+            socket.emit("iceCandidate", event.candidate);
+        }
+    };
+
+    socket.on("iceCandidate", (candidate) => {
+        peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+    });
+
+    socket.on("offer", async (offer) => {
+        await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+        const answer = await peerConnection.createAnswer();
+        await peerConnection.setLocalDescription(answer);
+        socket.emit("answer", answer);
+    });
+
+    socket.on("answer", (answer) => {
+        peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+    });
+
+    // Create and send offer if the local IP matches
+    if (localIp) {
+        peerConnection.createOffer().then(offer => {
+            peerConnection.setLocalDescription(offer);
+            socket.emit("offer", offer);
+        });
+    }
+};

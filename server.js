@@ -2,6 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 const http = require("http");
 const axios = require("axios");
+const os = require("os");
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -31,6 +32,10 @@ io.on("connection", (socket) => {
     console.log("Made socket connection", socket.id);
     players.push(socket.id);
     scores[socket.id] = { correct: 0, wrong: 0 };
+
+    // emit ip to client
+    const localIp = getLocalIpAddress();
+    socket.emit('localIp', localIp);
 
     socket.emit('serverToClient', 'test: hello client');
 
@@ -82,3 +87,16 @@ const nextQuestion = () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/multitrivia.html");
 });
+
+function getLocalIpAddress() {
+    const interfaces = os.networkInterfaces();
+    for (let iface in interfaces) {
+        for (let i = 0; i < interfaces[iface].length; i++) {
+            const address = interfaces[iface][i];
+            if (address.family === 'IPv4' && !address.internal) {
+                return address.address;
+            }
+        }
+    }
+    return null;
+}
