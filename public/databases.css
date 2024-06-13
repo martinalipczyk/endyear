@@ -1,6 +1,4 @@
-/* THIS IS NOT WHAT IT WILL ACTUALLY LOOK LIKE!! */
-/* THIS IS JUST A SAMPLE OF WHAT THE CSS COULD LOOK LIKE */
-/* CHANGE WHATEVER YOU WANT  */
+
 html{
     background:rgb(#FFFF
     \\);
@@ -15,7 +13,6 @@ body{
     width: 1000;
     height: 1300px;
     margin: 0 auto;
-    border: 8px solid rgb(255, 255, 255);
     padding: 0 20px 20px 20px
     
 
