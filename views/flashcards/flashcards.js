@@ -6,9 +6,12 @@ const defin = document.getElementById("defin");
 const errorMessage = document.getElementById("error");
 const addTerm = document.getElementById("add-flashcard");
 const closeBtn = document.getElementById("close-btn");
+const saveSetBtn = document.getElementById("saveset");
+const setName = document.getElementById("setName");
+
 let editBool = false;
 
-const flashcardMap = new Map(); // Initialize a Map to store the flashcards
+let flashcardMap = new Map(); // Initialize a Map to store the flashcards
 
 // Add term when user clicks 'Add Flashcard' button
 addTerm.addEventListener("click", () => {
@@ -195,3 +198,25 @@ function logFlashcards() {
     console.log(`Term: ${key}, Definition: ${value}`);
   });
 }
+
+saveSetBtn.addEventListener("click", saveSet); 
+
+function saveSet() {
+  let str = "";
+  flashcardMap.forEach((value, key) => {
+    str += key + ": " + value + "; ";
+  });
+
+  let name = setName.value;
+
+  fetch('/insertSet', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ setname: name, setstring: str }), 
+  })
+
+  flashcardMap = new Map();
+}
+

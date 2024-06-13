@@ -63,8 +63,15 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/todo", (req, res) => {
-    res.render("todo", {user_id: userid, username: userna});
-})
+    db.execute(get_all_task_items,[userid], (error, results) => {
+        if (error) {
+            res.status(500).send(error); // Internal Server Error
+        } else {
+            // res.send(results);
+            res.render("todo", {user_id: userid, username: userna, taskitems: results});        }
+    });
+    
+});
 
 app.get("/triviaselect", (req, res) => {
     res.render("triviaselect", {user_id: userid, username: userna});
@@ -125,71 +132,107 @@ app.post('/dologin', (req, res) => {
     });
 });
 
-app.post('/deleteTask', (req, res) => {
-    const { task_name } = req.body;
 
-    if (!userid) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
 
-    const deleteTaskQuery = 'DELETE FROM tasks WHERE task_name = ? AND user_id = ?';
-    db.query(deleteTaskQuery, [task_name, userid], (deleteErr, deleteResults) => {
-        if (deleteErr) {
-            console.error('Error deleting task: ' + deleteErr.message);
-            return res.status(500).json({ error: 'Internal Server Error' });
+
+
+
+const create_task = `
+    INSERT INTO tasks (user_id, task_name)
+    VALUES(?, ?)
+`;
+
+const get_all_task_items = `
+        SELECT task_name
+        FROM tasks
+        WHERE user_id = ?
+`
+
+app.post("/addTask", (req, res)=>{
+    db.execute(create_task, [userid, req.body.task], (error, results)=> {
+        if(error){
+            res.status(500).send(error);
         }
-        if (deleteResults.affectedRows > 0) {
-            res.json({ message: 'Task deleted successfully' });
-        } else {
-            res.status(404).json({ error: 'Task not found' });
+        else{
+            res.redirect("todo");
         }
     });
 });
 
+const delete_task = `
+    DELETE FROM tasks
+    WHERE task_name = ?    
+`
 
-
-
-
-app.post('/addTask', (req, res) => {
-    console.log("req.body is " +req.body);
-    const { task_name } = req.body;
-
-    if (!task_name || task_name.trim() === '') {
-        return res.status(400).json({ error: 'Task name cannot be empty' });
-    }
-
-    console.log('Received taskName:', task_name);
-    const insertTaskQuery = 'INSERT INTO tasks (user_id, task_name) VALUES (?, ?)';
-    db.query(insertTaskQuery, [userid, task_name], (insertErr, insertResults) => {
-        if (insertErr) {
-            console.error('Error saving task: ' + insertErr.message);
-            return res.status(500).json({ error: 'Internal Server Error' });
+app.get("/todo/:id/delete", (req, res) => {
+    db.execute(delete_task, [req.params.task_name], (error, results) =>{
+        if(error){
+            res.status(500).send(error);
         }
-        console.log('Received taskName:', task_name);
-        res.status(200).json({ message: 'Task saved successfully' });
+        else{
+            res.redirect("/")
+        };
     });
 });
 
-app.get('/getUserTasks', (req, res) => {
+// app.post('/addTask', (req, res) => {
+//     console.log("req.body is " +req.body);
+//     const { task_name } = req.body;
 
-        if (!userid) {
-            return res.status(401).json({ error: 'Unauthorized' });
+//     if (!task_name || task_name.trim() === '') {
+//         return res.status(400).json({ error: 'Task name cannot be empty' });
+//     }
+
+//     console.log('Received taskName:', task_name);
+//     const insertTaskQuery = 'INSERT INTO tasks (user_id, task_name) VALUES (?, ?)';
+//     db.query(insertTaskQuery, [userid, task_name], (insertErr, insertResults) => {
+//         if (insertErr) {
+//             console.error('Error saving task: ' + insertErr.message);
+//             return res.status(500).json({ error: 'Internal Server Error' });
+//         }
+//         console.log('Received taskName:', task_name);
+//         res.status(200).json({ message: 'Task saved successfully' });
+//     });
+// });
+
+// app.get('/getUserTasks', (req, res) => {
+
+//         if (!userid) {
+//             return res.status(401).json({ error: 'Unauthorized' });
+//         }
+    
+    
+//         const getUserTasksQuery = 'SELECT task_name FROM tasks WHERE user_id = ?';
+//         db.query(getUserTasksQuery, [userid], (err, results) => {
+//             if (err) {
+//                 console.error('Error fetching user tasks:', err);
+//                 return res.status(500).json({ error: 'Internal Server Error' });
+//             }
+    
+//             const tasks = results.map(result => ({ task_name: result.task_name }));
+    
+//             res.json({ tasks: tasks });
+//         });
+// });
+
+
+const setAdd = `
+    INSERT INTO sets (set_name, set_string)
+    VALUES(?, ?)
+`;
+
+app.post("/insertSet", (req, res)=>{
+    console.log(req.body);
+    db.execute(setAdd, [req.body.setname, req.body.setstring], (error, results)=> {
+
+        if(error){
+            res.status(500).send(error);
         }
-    
-    
-        const getUserTasksQuery = 'SELECT task_name FROM tasks WHERE user_id = ?';
-        db.query(getUserTasksQuery, [userid], (err, results) => {
-            if (err) {
-                console.error('Error fetching user tasks:', err);
-                return res.status(500).json({ error: 'Internal Server Error' });
-            }
-    
-            const tasks = results.map(result => ({ task_name: result.task_name }));
-    
-            res.json({ tasks: tasks });
-        });
+        else{
+            res.redirect("flashcards");
+        }
     });
-
+});
 
 // Add a route for handling logout requests
 app.get("/logout", (req, res) => {

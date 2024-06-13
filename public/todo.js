@@ -9,21 +9,22 @@ document.querySelector('#push').onclick = function (event) {
     } else {
         console.log(taskName);
 
-        document.querySelector('#tasks').innerHTML += `
+        // document.querySelector('#tasks').innerHTML += `
         
-            <div class="container">
-                <div class="row">
-                    <span class="col s3 left-align" id="taskname">${taskName}</span>
-                    <a href="#" class="col s2 btn right-align offset-s6 delete-task">
-                        <i class="far fa-trash-alt"></i>done
-                    </a>
-                    <p></p>
-                </div>
-            </div>
-        `;
+        //     <div class="container">
+        //         <div class="row">
+        //             <span class="col s3 left-align" id="taskname">${taskName}</span>
+        //             <a href="#" class="col s2 btn right-align offset-s6 delete-task">
+        //                 <i class="far fa-trash-alt"></i>done
+        //             </a>
+        //             <p></p>
+        //         </div>
+        //     </div>
+        // `;
 
         addToDatabase(taskName);
         updateDeleteFunctionality();
+        fetchUserTasks();
         document.querySelector('#txt').value = ''; // Clear the input box after adding a task
     }
 };
@@ -80,11 +81,12 @@ function fetchUserTasks() {
 
 function displayTasks(tasks) {
     const tasksContainer = document.querySelector('#tasks');
-    tasksContainer.innerHTML = '';
+    // tasksContainer.innerHTML = '';
     tasks.forEach(task => {
         tasksContainer.innerHTML += `
             <div class="container">
                 <div class="row">
+                <br>
                     <span class="col s3 left-align" id="taskname">${task.task_name}</span>
                     <a href="#" class="col s2 btn right-align offset-s6 delete-task">
                         <i class="far fa-trash-alt"></i>done

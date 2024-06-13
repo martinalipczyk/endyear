@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>to-do list</title>
-    
-    <link rel="stylesheet" href="/todo.css">
-</head>
-<body>
+
+    <link rel="stylesheet" href="/todo.css" />
+  </head>
+  <body>
     <div class="home">
-        <button id="home" onclick="window.location.href='/index'">
-            <img src="graphics/thestublogo.png" alt="Home">
-        </button>
+      <button id="home" onclick="window.location.href='/index'">
+        <img src="graphics/thestublogo.png" alt="Home" />
+      </button>
     </div>
 
     <div class="container">
-        <div>
-            <h1>to-do list</h1>
-            <p>organize and assess your tasks</p>
+      <div>
+        <h1>to-do list</h1>
+        <p>organize and assess your tasks</p>
+        <form action = "/addTask" method = "POST">
             <div class="container">
-                <div id="newtask" style="z-index: 1000 !important;">
-                    <!-- <form id="todoform" action="/addTask" method="post"> -->
-                    <input class="input-color" type="text" id="txt" placeholder="add tasks">
-                    <!-- </form> -->
-                    <button class="btn button-color" id="push">add</button>
-            </div>
-                <div id="tasks">
+                <div id="newtask" style="z-index: 1000 !important">
+                  <input
+                    class="input-color"
+                    type="text"
+                    id="txt"
+                    name = "task"
+                    placeholder="add tasks"/>
+                    <input type="submit" value="submit" class="btn deep-purple lighten-3 ">
 
+                  <!-- <button class="btn button-color" id="push">add</button> -->
                 </div>
+                <% for(let i = 0; i<taskitems.length; i++){%>
+                    <td><%=taskitems[i].task_name%></td>
+                    <td><a class="btn" href = "/todo/<%= taskitems[i].task_name %>/delete">delete</a></td>
+                    <br>
+                <%}%>
+                
+                          <div id="tasks"></div>
+              </div>
             </div>
-        </div>
-    </div>
+          </div>
+        </form>
+        
 
     <script src="todo.js"></script>
-</body>
+  </body>
 </html>
