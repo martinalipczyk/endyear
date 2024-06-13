@@ -264,6 +264,7 @@ app.get("/setdisplay", (req, res)=> {
     })
 })
 
+
 const access = `
     SELECT set_name, set_string
     FROM sets
@@ -281,6 +282,8 @@ app.get("/select/:id", (req, res) => {
         }
     })
 })
+
+// app.get("/study")
 
 // Add a route for handling logout requests
 app.get("/logout", (req, res) => {
