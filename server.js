@@ -238,7 +238,6 @@ const setAdd = `
 app.post("/insertSet", (req, res)=>{
     console.log(req.body);
     db.execute(setAdd, [req.body.setname, req.body.setstring], (error, results)=> {
-
         if(error){
             res.status(500).send(error);
         }
