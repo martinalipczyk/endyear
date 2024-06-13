@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study</title>
+    <link  rel="stylesheet" href="/study.css"/>
 </head>
 <body>
     
-    <button id = "left">left</button>
-    <button id = "right">right</button>
-
-
-    <p hidden id = "sName"><%=set.set_name%></p>
-    <p hidden id = "sString"><%=set.set_string%></p>
+    <td>
+        <button id = "left">left</button>
+        <div id = "flashcard">
+            <h1 id = "front"><h1>
+            <h1 id = "back"><h1>
+        </div>
+        <button id = "right">right</button>
+    </td>
     
-    <script src = "/loadedFlashcards.js"></script> 
+
+
+
+    <p hidden id = "sName"><%=set[0].set_name%></p>
+    <p hidden id = "sString"><%=set[0].set_string%></p>
+    
     <script src = "/study.js"></script> 
 
 </body>

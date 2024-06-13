@@ -282,6 +282,9 @@ app.get("/select/:id", (req, res) => {
     })
 })
 
+// app.get("/study", (req, res) =>{
+//     res.render("study", {set:res});
+// })
 
 app.get("/stud/:id", (req, res) => {
     const setName = req.params.id; 
@@ -291,7 +294,8 @@ app.get("/stud/:id", (req, res) => {
             res.status(500).send(error);
         }
         else{
-            res.render("study", {set: results[0]});
+            console.log("results:" + results)
+            res.render("study", {set: results});
         }
     })
 })

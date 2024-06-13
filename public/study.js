@@ -40,7 +40,8 @@ rightButton.addEventListener("click", () => {
 })
 
 function flipCard() {
-    return;
+    const flashcard = document.getElementById('flashcard');
+    flashcard.classList.toggle('flipped');
 }
 
 function nextCard() {

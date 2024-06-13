@@ -12,9 +12,11 @@ const selectSet = document.getElementById("selectSet");
 const displaySetBtn = document.getElementById("displaySetBtn");
 const studyButton = document.getElementById("study");
 
-
 const sName = document.getElementById("sName");
 const sString = document.getElementById("sString");
+
+console.log("sName is " + sName.textContent);
+console.log("sString is " + sString.textContent);
 
 
 
@@ -304,9 +306,3 @@ function displaySet() {
 };
 
 var globalVariable = new Map([flashcardMap, uploadMap])
-
-studyButton.addEventListener("click", study);
-
-function study() {
-    window.location.href = '/study'
-}
