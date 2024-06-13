@@ -264,7 +264,7 @@ app.get("/setdisplay", (req, res)=> {
     })
 })
 
-const showSets = `
+const access = `
     SELECT set_name, set_string
     FROM sets
     WHERE set_name = ?
@@ -272,7 +272,14 @@ const showSets = `
 
 app.get("/select/:id", (req, res) => {
     const setName = req.params.id;
-    devNul
+    db.execute(access, [setName], (error, results) => {
+        if(error){
+            res.status(500).send(error);
+        }
+        else{
+            res.render("loadedFlashcards", {set: results});
+        }
+    })
 })
 
 // Add a route for handling logout requests
