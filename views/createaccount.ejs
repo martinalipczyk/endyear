@@ -3,40 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- <link rel="stylesheet" href="/styling.css"> -->
-
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>create your account</title>
+    <style>
+        body {
+            background-color: #30a474; 
+        }
+        .btn-custom {
+            background-color: #226e4f !important; 
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .input-field input[type="text"],
+        .input-field input[type="password"],
+        .input-field input[type="email"],
+        .input-field input[type="text"]:focus,
+        .input-field input[type="password"]:focus,
+        .input-field input[type="email"]:focus {
+            color: black;
+            background-color: #30a474; 
+        }
+        label {
+            color: black;
+        }
+        .input-field{
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <form method = "post" id="registrationForm" action="/register" >
-        <div class = container>
+    <div class="image-container">
+        <img src="stub welcome banner.png" alt="Logo"> 
+    </div>
+
+    <div class="container">
+        <form method="post" id="registrationForm" action="/register">
             <h1>create your account</h1>
-            <label for = "firstname">what's your first name?</label>
-            <input type = "text" name = "first_name" placeholder = "Spongebob" required>
-            <br>
-            <label for = "lastname">what's your last name?</label>
-            <input type = "text" name = "last_name" placeholder = "Squarepants" required>
-            <br>
-            <label for = "username">choose your username.</label>
-            <input type = "text" name = "username" minlength = "6" placeholder = "Spongebob" required>
-            <br>
-            <label for = "password">choose your password.</label>
-            <input type = "password" name = "password" minlength = "6" placeholder = "Spongebob" required>
-            <br>
-            
-            <label for = "email">email:</label>
-            <input type = "email" name = "email" placeholder = "squarepants@gmail.com">
-
-            <input type = "submit" a href = "#" class = "btn"></a>
-            <input type = "reset" a href = "#" class = "btn"></a>
-
-        </div>
-
-    </form>
+            <div class="input-field">
+                <label for="firstname">what's your first name?</label>
+                <input type="text" name="first_name" id="firstname" placeholder="Spongebob" required>
+            </div>
+            <div class="input-field">
+                <label for="lastname">what's your last name?</label>
+                <input type="text" name="last_name" id="lastname" placeholder="Squarepants" required>
+            </div>
+            <div class="input-field">
+                <label for="username">choose your username.</label>
+                <input type="text" name="username" id="username" minlength="6" placeholder="Spongebob" required>
+            </div>
+            <div class="input-field">
+                <label for="password">choose your password.</label>
+                <input type="password" name="password" id="password" minlength="6" placeholder="Spongebob" required>
+            </div>
+            <div class="input-field">
+                <label for="email">email:</label>
+                <input type="email" name="email" id="email" placeholder="squarepants@gmail.com">
+            </div>
+            <button type="submit" class="btn waves-effect waves-light btn-custom">Create Account</button>
+            <button type="reset" class="btn waves-effect waves-light btn-custom">Reset</button>
+        </form>
+    </div>
 </body>
 </html>
