@@ -161,3 +161,15 @@ body.scroll{
     display: flex;
     justify-content: space-between;
 }
+
+.todo{
+    border: 2px solid black; 
+    border-radius: 5px; 
+    padding: 20px; 
+    width: 100px;
+    height: 100px; 
+    margin: 20px; 
+    background-color: white; /* Adding a white background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a subtle box shadow */
+    text-align: center;
+}
