@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study</title>
-    <link  rel="stylesheet" href="/study.css"/>
+    <link rel="stylesheet" href="/study.css"/>
 </head>
 <body>
-    
-    <td>
-        <button id = "left">left</button>
-        <div id = "flashcard">
-            <h1 id = "front"><h1>
-            <h1 id = "back"><h1>
+    <h1><%= set[0].set_name %></h1> <!-- Corrected closing h1 tag -->
+
+    <div class="flashcard_container">
+        <button id="left">Left</button>
+        <div id="flashcard">
+            <h1 id="front"></h1> <!-- Corrected closing h1 tag -->
+            <h1 id="back"></h1> <!-- Corrected closing h1 tag -->
         </div>
-        <button id = "right">right</button>
-    </td>
+        <button id="right">Right</button>
+    </div>
+    <button id="flip">Flip</button> <!-- Added flip button -->
+
+
+    <p hidden id="sName"><%= set[0].set_name %></p>
+    <p hidden id="sString"><%= set[0].set_string %></p>
     
-
-
-
-    <p hidden id = "sName"><%=set[0].set_name%></p>
-    <p hidden id = "sString"><%=set[0].set_string%></p>
-    
-    <script src = "/study.js"></script> 
-
+    <script src="/study.js"></script>
 </body>
-
 </html>

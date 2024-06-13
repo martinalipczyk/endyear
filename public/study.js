@@ -1,49 +1,66 @@
-const sName = document.getElementById("sName");
-const sString = document.getElementById("sString");
+const name = document.getElementById("sName").textContent;
+const string = document.getElementById("sString").textContent;
 
-console.log(sString);
+const front = document.getElementById("front");
+const back = document.getElementById("back");
 
 let map = new Map();
 
-const notePairs = sString.split(';');
+const notePairs = string.split(';');
 
 for (let i = 0; i < notePairs.length; i++) {
-const pair = notePairs[i].split(':');
+    const pair = notePairs[i].split(':');
     if (pair.length === 2) {
         map.set(pair[0].trim(), pair[1].trim());
     }
 }
 
-const keys = map.keys;
+const keys = Array.from(map.keys());
+let count = 0;
+let num = 0;
 
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
+const flipButton = document.getElementById("flip");
 
-console.log(map);
+// Initial display
+updateCard();
 
-
-counter = 0;
 leftButton.addEventListener("click", () => {
-    counter --;
-    if(counter<keys.length){
-        counter = keys.length-1;
+    count--;
+    if (count < 0) {
+        count = keys.length - 1;
     }
-    nextCard();
-})
+    updateCard();
+});
 
 rightButton.addEventListener("click", () => {
-    counter ++;
-    if (counter > keys.length) {
-        counter = 0;
+    count++;
+    if (count >= keys.length) {
+        count = 0;
     }
-    nextCard();
-})
+    updateCard();
+});
 
-function flipCard() {
-    const flashcard = document.getElementById('flashcard');
-    flashcard.classList.toggle('flipped');
+flipButton.addEventListener("click", () => {
+    num++;
+    flipCard();
+});
+
+function updateCard() {
+    front.textContent = keys[count];
+    back.textContent = map.get(keys[count]);
+    front.style.visibility = "visible";
+    back.style.visibility = "hidden";
+    num = 0; // Reset flip counter when changing cards
 }
 
-function nextCard() {
-    return;
+function flipCard() {
+    if (num % 2 === 0) {
+        front.style.visibility = "hidden";
+        back.style.visibility = "visible";
+    } else {
+        front.style.visibility = "visible";
+        back.style.visibility = "hidden";
+    }
 }

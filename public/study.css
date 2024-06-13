@@ -1,23 +1,12 @@
-#flashcard {
-    border: 2px solid #ccc;
-    border-radius: 10px;
-}
-
 #front {
-    transform: rotateY(0deg);
+    visibility: visible
 }
 
 #back {
-    transform: rotateY(180deg);
-    visibility: hidden;
+    visibility: hidden
 }
 
-#flashcard.flipped #front {
-    transform: rotateY(-180deg);
-    visibility: hidden;
-}
-
-#flashcard.flipped #back {
-    transform: rotateY(0deg);
-    visibility: visible;
+.flashcard_container{
+    display:flex;
+    justify-content: space-between;
 }
