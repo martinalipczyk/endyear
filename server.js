@@ -161,17 +161,26 @@ app.post("/addTask", (req, res)=>{
 
 const delete_task = `
     DELETE FROM tasks
-    WHERE task_name = ?    
-`
+    WHERE task_name = ? AND user_id = ?
+`;
 
 app.get("/todo/:id/delete", (req, res) => {
-    db.execute(delete_task, [req.params.task_name], (error, results) =>{
-        if(error){
+    const taskName = req.params.id; 
+    const userId = userid; 
+
+    db.execute(delete_task, [taskName, userId], (error, results) => {
+        if (error) {
+            console.error('Error deleting task:', error);
             res.status(500).send(error);
+        } else {
+            if (results.affectedRows > 0) {
+                console.log('Task deleted successfully');
+                res.redirect("/todo"); 
+            } else {
+                console.log('Task not found');
+                res.status(404).json({ error: 'Task not found' });
+            }
         }
-        else{
-            res.redirect("/")
-        };
     });
 });
 
@@ -233,6 +242,23 @@ app.post("/insertSet", (req, res)=>{
         }
     });
 });
+
+const showSets = `
+    SELECT set_name
+        FROM sets
+        WHERE set_string = ?
+`;
+
+app.get("/getSets", (req, res)=> {
+    db.execute(showSets, (error, results) => {
+        if(error){
+            res.status(500).send(error);
+        }
+        else{
+            res.render("setdisplay", {sets: results})
+        }
+    })
+})
 
 // Add a route for handling logout requests
 app.get("/logout", (req, res) => {
