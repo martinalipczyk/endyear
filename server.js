@@ -282,9 +282,21 @@ app.get("/select/:id", (req, res) => {
     })
 })
 
-// app.get("/study")
 
-// Add a route for handling logout requests
+app.get("/stud/:id", (req, res) => {
+    const setName = req.params.id; 
+
+    db.execute(access, [setName], (error, results) => {
+        if(error){
+            res.status(500).send(error);
+        }
+        else{
+            res.render("study", {set: results[0]});
+        }
+    })
+})
+
+
 app.get("/logout", (req, res) => {
     // Clear user session or authentication token
     userid = null;

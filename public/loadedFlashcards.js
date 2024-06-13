@@ -16,6 +16,8 @@ const studyButton = document.getElementById("study");
 const sName = document.getElementById("sName");
 const sString = document.getElementById("sString");
 
+
+
 let editBool = false;
 
 let flashcardMap = new Map(); // Initialize a Map to store the flashcards
@@ -288,7 +290,7 @@ function saveSet() {
 }
 
 displaySetBtn.addEventListener("click", displaySet); 
-studyButton.addEventListener("click", study);
+
 
 function displaySet() {
 
@@ -301,12 +303,10 @@ function displaySet() {
   window.location.href = '/setdisplay'
 };
 
-function study() {
-    
-    var globalVariable = {
-        newMap: new Map([flashcardMap, uploadMap])
-    }
+var globalVariable = new Map([flashcardMap, uploadMap])
 
-    flashcardMap = new Map();
-    uploadMap = new Map();
+studyButton.addEventListener("click", study);
+
+function study() {
+    window.location.href = '/study'
 }
