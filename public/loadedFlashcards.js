@@ -10,6 +10,7 @@ const saveSetBtn = document.getElementById("saveset");
 const setName = document.getElementById("setName");
 const selectSet = document.getElementById("selectSet");
 const displaySetBtn = document.getElementById("displaySetBtn");
+const studyButton = document.getElementById("study");
 
 
 const sName = document.getElementById("sName");
@@ -287,6 +288,7 @@ function saveSet() {
 }
 
 displaySetBtn.addEventListener("click", displaySet); 
+studyButton.addEventListener("click", study);
 
 function displaySet() {
 
@@ -298,3 +300,13 @@ function displaySet() {
   });
   window.location.href = '/setdisplay'
 };
+
+function study() {
+    
+    var globalVariable = {
+        newMap: new Map([flashcardMap, uploadMap])
+    }
+
+    flashcardMap = new Map();
+    uploadMap = new Map();
+}
