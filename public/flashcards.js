@@ -8,6 +8,8 @@ const addTerm = document.getElementById("add-flashcard");
 const closeBtn = document.getElementById("close-btn");
 const saveSetBtn = document.getElementById("saveset");
 const setName = document.getElementById("setName");
+const selectSet = document.getElementById("selectSet");
+const displaySetBtn = document.getElementById("displaySetBtn");
 
 let editBool = false;
 
@@ -220,3 +222,15 @@ function saveSet() {
   flashcardMap = new Map();
 }
 
+displaySetBtn.addEventListener("click", displaySet); 
+
+function displaySet() {
+
+  fetch('/getSets', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+  });
+  window.location.href = '/setdisplay'
+};

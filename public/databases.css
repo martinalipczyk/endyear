@@ -13,7 +13,7 @@ html{
 body{
     background:rgb(48,164,116);
     width: 1000;
-    height: flex;
+    height: 700px;
     margin: 0 auto;
     border: 8px solid rgb(255, 255, 255);
     padding: 0 20px 20px 20px
@@ -145,5 +145,10 @@ li.bold{
 
 .home {
     display: flex;
+    justify-content: space-between;
+}
+
+.userInfo {
+    display:flex;
     justify-content: space-between;
 }

@@ -8,6 +8,10 @@ let correct = 0;
 let totalQuestions = 5;
 let choseLength = false;
 
+var correctAudio = new Audio('correct.mp3');
+var wrong = new Audio('wrong.mp3');
+
+
 function toggleMusic() {
     var music = document.getElementById('bgMusic');
     var musicToggle = document.getElementById('musicToggle');
@@ -122,6 +126,11 @@ function checkAnswer(selectedOption, correctAnswer) {
         });
         if(selectedOption.textContent == correctAnswer){
             correct++;
+            correctAudio.play();
+
+        }
+        else{
+            wrong.play();
         }
         correctScoreElement.textContent = correct; 
 

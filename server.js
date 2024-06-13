@@ -244,9 +244,8 @@ app.post("/insertSet", (req, res)=>{
 });
 
 const showSets = `
-    SELECT set_name
-        FROM sets
-        WHERE set_string = ?
+    SELECT set_name, set_string
+    FROM sets
 `;
 
 app.get("/getSets", (req, res)=> {
@@ -255,7 +254,7 @@ app.get("/getSets", (req, res)=> {
             res.status(500).send(error);
         }
         else{
-            res.render("setdisplay", {sets: results})
+            res.render("setdisplay", {sets: results});
         }
     })
 })
