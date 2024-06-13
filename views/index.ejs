@@ -4,31 +4,71 @@
 
 <head>
     <title>stub web</title>
-    <link  rel="stylesheet" type = "text/css" href="index.css"/>
+       <!-- Compiled and minified CSS -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="/index.css">
+    
 </head>
 
 <body>
 
+    <div class = "userInfo">
+        <p style = "text-align: right;">Welcome, <%=username%>!</p>
+        <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out</button>
+        <script>
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                // Make an AJAX request to the logout route
+                fetch("/logout", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        // Redirect the user to the login page
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error logging out:", error);
+                    // Handle error
+                });
+            });
+            </script>
+            
+        </div>
+    
     <div>
-        <h1 id="mpheading"><img src = "graphics/thestublogo.png"></h1>
+        <h1 id="mpheading"><img src = "/graphics/thestublogo.png"></h1>
     </div>
 
     <div>
         <p id="jspp">the bca student hub!</p>
+
     </div>
     
     <span class="buttoncon">
         
-            <button id = "to-do" onclick="window.location.href='todo.html'"><img src = "graphics/todowidget.png" style="width:175px;height:auto;"></button>
+            <button id = "to-do" onclick="window.location.href='/todo'"><img src = "graphics/todowidget.png" style="width:175px;height:auto;"></button>
 
-            <button id = "linkhub" onclick="window.location.href='linkhub.html'"><img src = "graphics/linkhubwidget.png" style="width:175px;height:auto;" ></button>
+            <button id = "linkhub" onclick="window.location.href='/linkhub'"><img src = "graphics/linkhubwidget.png" style="width:175px;height:auto;" ></button>
 
-            <button id = "databases" onclick="window.location.href='databases.html'"><img src = "graphics/databaseswidget.png" style="width:175px;height:auto;"></button>
+            <button id = "databases" onclick="window.location.href='/databases'"><img src = "graphics/databaseswidget.png" style="width:175px;height:auto;"></button>
        
-            <button id = "grade calculator" onclick="window.location.href='gc.html'"><img src = "graphics/calcwidget.png" style="width:175px;height:auto;"></button>
+            <button id = "grade calculator" onclick="window.location.href='/gc'"><img src = "graphics/calcwidget.png" style="width:175px;height:auto;"></button>
 
-            <button id = "pomodoro" onclick="window.location.href='pomodoro.html'"><img src = "graphics/pomowidget.png" style="width:175px;height:auto;"></button>
-       
+            <button id = "pomodoro" onclick="window.location.href='/pomodoro'"><img src = "graphics/pomowidget.png" style="width:175px;height:auto;"></button>
+            
+            <button id = "solo_trivia" onclick="window.location.href='/solo_trivia'">solo trivia</button>
+
+            <button id = "flashcards" onclick="window.location.href='/flashcards'">use flashcards</button>
+
+            <button id = "summarize" onclick="window.location.href='/summarize'">summarize notes</button>
+
             
      
     </span>
@@ -44,12 +84,14 @@
     <p> </p>
 
     <div class = "btnc">
-        <button id = "github" onclick="window.location.href='https://github.com/liamstrauser/stubweb'"><img src = "graphics/githubwidget.png" style="width:150px;height:auto;"></button>
+        <button id = "github" onclick="window.location.href='https://github.com/martinalipczyk/endyear'"><img src = "graphics/githubwidget.png" style="width:150px;height:auto;"></button>
     </div>
 
     <p>thank you for using stub :) - Martina Lipczyk, Liam Strauser, Mia Subrahmanyam, & Yuto Takeda</p>
     
 </footer>
+
+
 
 <script> src="stubhome.js"</script>
 

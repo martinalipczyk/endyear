@@ -2,40 +2,34 @@
 <html>
 <head>
     <title>to-do list</title>
-    <link  rel="stylesheet" type = "text/css" href="todo.css"/>
     
+    <link rel="stylesheet" href="/todo.css">
 </head>
 <body>
-
-  <div class = "home">
-    <button id = "home" onclick="window.location.href='../stubhome.html'"><img src = "graphics/thestublogo.png"></button>
-  </div>
-
-  <div>
-    <h1 id="mpheading">to-do list</h1>
-  </div>
-
-  <div>
-    <p id = "todosub">keep track of your tasks!</p>
-  </div>
-
-  <div>
-    <p id="jspp"></p>
-  </div>
-
-  <div class = "container">
-    <div id = "newtask">
-      <input type = "text" id = "textplace" placeholder="add tasks">
-      <button id="push">add</button>
+    <div class="home">
+        <button id="home" onclick="window.location.href='/index'">
+            <img src="graphics/thestublogo.png" alt="Home">
+        </button>
     </div>
-    
-  <div id = "tasks">
 
-  </div>
-  
+    <div class="container">
+        <div>
+            <h1>to-do list</h1>
+            <p>organize and assess your tasks</p>
+            <div class="container">
+                <div id="newtask" style="z-index: 1000 !important;">
+                    <!-- <form id="todoform" action="/addTask" method="post"> -->
+                    <input class="input-color" type="text" id="txt" placeholder="add tasks">
+                    <!-- </form> -->
+                    <button class="btn button-color" id="push">add</button>
+            </div>
+                <div id="tasks">
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="todo.js"></script>
 </body>
-
-<script src = "todo.js"></script>
-
 </html>
