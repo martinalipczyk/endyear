@@ -5,14 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>note summarizer</title>
     <link rel="stylesheet" href="/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #30a474;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #30a474;
+            padding: 10px;
+        }
+        .home button {
+            background: none;
+            border: none;
+        }
+        .home img {
+            width: 100px; 
+        }
+        .userInfo {
+            display: flex;
+            align-items: center;
+        }
+        .userInfo button {
+            border-radius: 2px;
+            border-color: darkgreen;
+            padding: 5px 10px;
+            background-color: white;
+            color: #226e4f;
+            cursor: pointer;
+        }
+        .logoutBtn{
+            background-color: #30a474;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        h1, h2 {
+            color: black; 
+        }
+        h1 {
+            font-size: 2.5em; 
+        }
+        h2 {
+            font-size: 2em; 
+        }
+        textarea {
+            width: 80%;
+            height: 200px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: black;
+            background-color: #f4f4f4;
+        }
+        button {
+            background-color: #226e4f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .center-button {
+            display: flex;
+            justify-content: center;
+        }
+        #summaryOutput {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 <body>
+    <div class="home">
+        <button id="home" onclick="window.location.href='/index'">
+            <img src="graphics/thestublogo.png" alt="Home">
+        </button>
+        <div class="userInfo">
+            <button id="logoutBtn">Log Out</button>
+        </div>
+    </div>
     <div class="container">
-        <h1>summarizer</h1>
+        <h1>summarize your notes:</h1>
         <textarea id="noteInput" placeholder="Type your notes here..."></textarea>
-        <button onclick="summarizeNotes()">Summarize</button>
-        <h2>Summary</h2>
+        <div class="center-button">
+            <button onclick="summarizeNotes()">Summarize</button>
+        </div>
+        <h2>here's your summary:</h2>
         <p id="summaryOutput"></p>
     </div>
     <script src="summarize.js"></script>
+    <script>
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+            fetch("/logout", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error("Error logging out:", error);
+            });
+        });
+    </script>
 </body>
+</html>
