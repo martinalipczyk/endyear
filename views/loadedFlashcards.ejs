@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashcard App</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/flashcards.css" />
+</head>
+<body>
+
+    
+
+<div class="container">
+  <div class="add-button-container">
+    <button id="add-flashcard">Add Flashcard</button>
+    <button id="add-notes">Add Notes</button>
+    <button id = "displaySetBtn">Select an Existing Set</button>
+  </div>
+</div>
+
+<div>
+  <input id = "setName" type = "text" placeholder = "Unit 3 Vocab">
+  <button id="saveset">Save Flashcard Set</button>
+</div>
+
+<div id="card-con">
+    <div class="card-list-container"></div>
+</div>
+
+
+<div class="td-container hide" id="add-term-card">
+  <h2>Add Flashcard</h2>
+  <div class="wrapper">
+    <!-- Error message -->
+    <div class="error-con">
+      <span class="hide" id="error">Please fill out all input fields!</span>
+    </div>
+    <!-- Close Button -->   
+    <i class="fa-solid fa-xmark" id="close-btn"></i>
+  </div>
+
+  <label for="term">Term:</label>
+  <input type="text" id="term" placeholder="Enter Term">
+  <label for="defin">Definition:</label>
+  <textarea id="defin" placeholder="Enter Definition"></textarea>
+
+  <button id="save-btn">Save</button>
+</div>
+
+<div class="container">
+    <div class="studyco">
+        <button id="study">Study</button>
+    </div>
+  </div>
+    
+
+
+<p hidden id = "sName"><%=set[0].set_name%></p>
+    <p hidden id = "sString"><%=set[0].set_string%></p>
+
+<!-- Script -->
+<script src="/loadedFlashcards.js"></script>
+</body>
+</html>

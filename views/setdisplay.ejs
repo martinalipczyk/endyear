@@ -13,14 +13,13 @@
 
 <body>
 
-    <form id = "chooseSet" action = "loadSet" method = "GET">
+    
     <% for(let i = 0; i<sets.length; i++){%>
         <td><%=sets[i].set_name%></td>
-        <td><%=sets[i].set_string%></td>
-        <td><a class="btn" href = "/select/<%= sets[i].set_name %>">study</a></td>        
+        <!-- <td><%=sets[i].set_string%></td> -->
+        <td><a class="btn" href = "/select/<%= sets[i].set_name %>">view full set</a></td>        
         <br>
     <%}%>
-    </form>
 
 
 <!-- Script -->
