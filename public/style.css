@@ -1,8 +1,20 @@
-body{
-    text-align:center;
+body {
+  background-color: #30a474;
+   
 }
 
-.hidden{
-    display:none;
+.btn-custom {
+  background-color: #f0f0f0 !important; /* Change to your desired button color */
 }
-     
+
+.image-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+  
