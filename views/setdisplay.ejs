@@ -41,13 +41,14 @@
             </div>
     </div>
     
+    <div style = "margin:auto; width: 50%;">
     <% for(let i = 0; i<sets.length; i++){%>
-        <td><%=sets[i].set_name%></td>
+        <td ><%=sets[i].set_name%></td>
         <!-- <td><%=sets[i].set_string%></td> -->
         <td><a class="btn" href = "/select/<%= sets[i].set_name %>">view full set</a></td>        
         <br>
     <%}%>
-
+    </div>
 
 <!-- Script -->
 <script src="setdisplay.js"></script>

@@ -49,11 +49,17 @@
     </form>
 
     <div id="tasks">
-      <ul>
+        <table>
+            <th></th>
+            <th></th>
+        </table>
+      
         <% for(let i = 0; i < taskitems.length; i++) { %>
-          <li><%= taskitems[i].task_name %> <a class="btn" href="/todo/<%= taskitems[i].task_name %>/delete">delete</a></li>
+          <td style = "text-align: left;"><%= taskitems[i].task_name %></td>
+          <td style = "text-align: right;"><a class="btn" href="/todo/<%= taskitems[i].task_name %>/delete">delete</a></td> 
+          <br>
+          <br>
         <% } %>
-      </ul>
     </div>
   </div>
 
