@@ -11,9 +11,6 @@ let choseLength = false;
 var correctAudio = new Audio('correct.mp3');
 var wrong = new Audio('wrong.mp3');
 
-const jsc = new jsConfetti();
-
-
 function toggleMusic() {
     var music = document.getElementById('bgMusic');
     var musicToggle = document.getElementById('musicToggle');
@@ -146,7 +143,6 @@ function checkAnswer(selectedOption, correctAnswer) {
     } else {
         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${totalQuestions}.`;
         optionsElement.innerHTML = "";
-        jsc.addConfetti()
     }
 }
 
