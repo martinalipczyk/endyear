@@ -10,14 +10,18 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/flashcards.css" />
 </head>
+
 <body>
+
+    <form id = "chooseSet" action = "loadSet" method = "GET">
     <% for(let i = 0; i<sets.length; i++){%>
         <td><%=sets[i].set_name%></td>
-        <td><a class="btn" href = "/todo/<%= taskitems[i].task_name %>/delete">delete</a></td>
+        <td><%=sets[i].set_string%></td>
+        <td><a class="btn" href = "/select/<%= sets[i].set_name %>">study</a></td>        
         <br>
     <%}%>
+    </form>
 
-    
 
 <!-- Script -->
 <script src="setdisplay.js"></script>
