@@ -12,6 +12,7 @@ app.use(express.static("views"));
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
 
+
 app.use(express.json()); // Add this line to parse JSON payloads
 
 let userna = null;
@@ -61,6 +62,10 @@ app.get("/summarize", (req, res) => {
 app.get("/test", (req, res) => {
     res.render("test", {user_id: userid, username: userna});
 })
+
+// app.get("/setdisplay", (req, res) => {
+//     res.render("setdisplay", {user_id: userid, username: userna});
+// })
 
 app.get("/todo", (req, res) => {
     db.execute(get_all_task_items,[userid], (error, results) => {
@@ -248,15 +253,26 @@ const showSets = `
     FROM sets
 `;
 
-app.get("/getSets", (req, res)=> {
+app.get("/setdisplay", (req, res)=> {
     db.execute(showSets, (error, results) => {
         if(error){
             res.status(500).send(error);
         }
         else{
-            res.render("setdisplay", {sets: results});
+            res.render("setdisplay", {sets: results, user_id: userid, username: userna});
         }
     })
+})
+
+const showSets = `
+    SELECT set_name, set_string
+    FROM sets
+    WHERE set_name = ?
+`;
+
+app.get("/select/:id", (req, res) => {
+    const setName = req.params.id;
+    devNul
 })
 
 // Add a route for handling logout requests

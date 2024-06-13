@@ -14,6 +14,7 @@ const displaySetBtn = document.getElementById("displaySetBtn");
 let editBool = false;
 
 let flashcardMap = new Map(); // Initialize a Map to store the flashcards
+let uploadMap = new Map();
 
 // Add term when user clicks 'Add Flashcard' button
 addTerm.addEventListener("click", () => {
@@ -41,16 +42,14 @@ addNotesButton.addEventListener("click", () => {
   const userInput = prompt("Enter your notes in the format of 'Term1 : Definition1 ; Term2 : Definition2; etc.");
   const notePairs = userInput.split(';');
 
-  let map = new Map();
-
   for (let i = 0; i < notePairs.length; i++) {
     const pair = notePairs[i].split(':');
     if (pair.length === 2) {
-      map.set(pair[0].trim(), pair[1].trim());
+      uploadMap.set(pair[0].trim(), pair[1].trim());
     }
   }
 
-  map.forEach((value, key) => {
+  uploadMap.forEach((value, key) => {
     const cardContainer = document.querySelector(".card-list-container");
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -143,16 +142,16 @@ function generateCard(termValue, definValue) {
   const buttonsCon = document.createElement("div");
   buttonsCon.classList.add("buttons-con");
 
-  // Edit Button
-  const editButton = document.createElement("button");
-  editButton.setAttribute("class", "edit");
-  editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
-  editButton.addEventListener("click", () => {
-    editBool = true;
-    modifyElement(editButton, true);
-    addTermCard.classList.remove("hide");
-  });
-  buttonsCon.appendChild(editButton);
+  // // Edit Button
+  // const editButton = document.createElement("button");
+  // editButton.setAttribute("class", "edit");
+  // editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
+  // editButton.addEventListener("click", () => {
+  //   editBool = true;
+  //   modifyElement(editButton, true);
+  //   addTermCard.classList.remove("hide");
+  // });
+  // buttonsCon.appendChild(editButton);
 
   // Delete Button
   const deleteButton = document.createElement("button");
@@ -205,9 +204,14 @@ saveSetBtn.addEventListener("click", saveSet);
 
 function saveSet() {
   let str = "";
+
   flashcardMap.forEach((value, key) => {
     str += key + ": " + value + "; ";
   });
+
+  uploadMap.forEach((value, key) => {
+    str += key + ": " + value + "; ";
+  })
 
   let name = setName.value;
 
@@ -220,13 +224,14 @@ function saveSet() {
   })
 
   flashcardMap = new Map();
+  uploadMap = new Map();
 }
 
 displaySetBtn.addEventListener("click", displaySet); 
 
 function displaySet() {
 
-  fetch('/getSets', {
+  fetch('/setdisplay', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
