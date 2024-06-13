@@ -7,7 +7,35 @@
     <link rel="stylesheet" href="/study.css"/>
 </head>
 <body>
-    <h1><%= set[0].set_name %></h1> <!-- Corrected closing h1 tag -->
+    <div class = "home">
+        <button id = "home" onclick="window.location.href='/index'"><img src = "graphics/thestublogo.png"></button>
+        <div class = "userInfo">
+            <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out></button>
+            <script>
+                document.getElementById("logoutBtn").addEventListener("click", function() {
+                    // Make an AJAX request to the logout route
+                    fetch("/logout", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(response => {
+                        if (response.redirected) {
+                            // Redirect the user to the login page
+                            window.location.href = response.url;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error logging out:", error);
+                        // Handle error
+                    });
+                });
+                </script>
+                
+            </div>
+    </div>
+    <h1 style = "text-align: center;"><%= set[0].set_name %></h1> <!-- Corrected closing h1 tag -->
 
     <div class="flashcard_container">
         <button id="left">Left</button>
@@ -17,7 +45,12 @@
         </div>
         <button id="right">Right</button>
     </div>
-    <button id="flip">Flip</button> <!-- Added flip button -->
+    <div class = "counterContainer">
+        <p id = "counter"></p>
+        <button id="flip">Flip</button> <!-- Added flip button -->
+    </div>
+   
+    
 
 
     <p hidden id="sName"><%= set[0].set_name %></p>

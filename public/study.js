@@ -1,5 +1,6 @@
 const name = document.getElementById("sName").textContent;
 const string = document.getElementById("sString").textContent;
+const counter = document.getElementById("counter");
 
 const front = document.getElementById("front");
 const back = document.getElementById("back");
@@ -19,6 +20,7 @@ const keys = Array.from(map.keys());
 let count = 0;
 let num = 0;
 
+counter.innerHTML = "1/"+keys.length;
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 const flipButton = document.getElementById("flip");
@@ -53,6 +55,7 @@ function updateCard() {
     front.style.visibility = "visible";
     back.style.visibility = "hidden";
     num = 0; // Reset flip counter when changing cards
+    counter.innerHTML = (count+1) + "/" + keys.length
 }
 
 function flipCard() {
