@@ -9,12 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/flashcards.css" />
-</head>
+  
+<style>
+    h1{
+      text-align: center;
+    }
+    
+    </style>
+    </head>
 <body>
     <div class = "home">
-        <button id = "home" onclick="window.location.href='/index'"><img src = "graphics/thestublogo.png"></button>
+        <button id = "home" onclick="window.location.href='/index'"><img src = "/graphics/thestublogo.png"></button>
         <div class = "userInfo">
-            <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out></button>
+            <button style = "border-radius: 2; border-color: darkgreen;" id="logoutBtn">Log Out</button>
             <script>
                 document.getElementById("logoutBtn").addEventListener("click", function() {
                     // Make an AJAX request to the logout route
@@ -39,6 +46,8 @@
                 
             </div>
     </div>
+    <h1>View Your Set!</h1>
+
     
 
 <div class="container">
@@ -49,16 +58,17 @@
   </div>
 </div>
 
-<div>
-  <input id = "setName" type = "text" placeholder = "Unit 3 Vocab">
-  <button id="saveset">Save Flashcard Set</button>
-</div>
+
 
 <div id="card-con">
     <div class="card-list-container"></div>
 </div>
 
-
+<div class = "inputDiv">
+    <input id = "setName" type = "text" placeholder = "Unit 3 Vocab">
+    <button id="saveset">Save Flashcard Set</button>
+  </div>
+  
 <div class="td-container hide" id="add-term-card">
   <h2>Add Flashcard</h2>
   <div class="wrapper">
@@ -76,13 +86,14 @@
   <textarea id="defin" placeholder="Enter Definition"></textarea>
 
   <button id="save-btn">Save</button>
+  <p><p>
 </div>
 
-<div class="container">
+<!-- <div class="container"> -->
     <div class="studyco">
-        <a class ="btn" href = "/stud/<%= set[0].set_name %>">Study</button>
+        <a class ="btn" id = "abc" href = "/stud/<%= set[0].set_name %>">Study</button>
     </div>
-</div>
+<!-- </div> -->
     
 
 

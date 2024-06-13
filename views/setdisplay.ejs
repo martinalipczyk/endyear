@@ -40,14 +40,18 @@
                 
             </div>
     </div>
-    
+    <h1>Choose Your Set: </h1>
     <div style = "margin:auto; width: 50%;">
+        <ul>
     <% for(let i = 0; i<sets.length; i++){%>
-        <td ><%=sets[i].set_name%></td>
+        <li ><%=sets[i].set_name%></li><a class="btn" href = "/select/<%= sets[i].set_name %>">view full set</a>   
         <!-- <td><%=sets[i].set_string%></td> -->
-        <td><a class="btn" href = "/select/<%= sets[i].set_name %>">view full set</a></td>        
+       
+
+        <br>
         <br>
     <%}%>
+</ul>
     </div>
 
 <!-- Script -->

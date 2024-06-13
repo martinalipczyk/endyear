@@ -11,6 +11,8 @@ let choseLength = false;
 var correctAudio = new Audio('correct.mp3');
 var wrong = new Audio('wrong.mp3');
 
+const jsc = new jsConfetti();
+
 
 function toggleMusic() {
     var music = document.getElementById('bgMusic');
@@ -67,7 +69,7 @@ function removeButtons(){
 
 async function loadQuestion() {
     if(choseLength==true){
-        const apiurl = "https://opentdb.com/api.php?amount=30";
+        const apiurl = "https://opentdb.com/api.php?amount=30&category=18";
         const result = await fetch(apiurl);
         const quizData = await result.json();
         
@@ -144,6 +146,7 @@ function checkAnswer(selectedOption, correctAnswer) {
     } else {
         questionElement.textContent = `Quiz Complete! You scored ${correct} out of ${totalQuestions}.`;
         optionsElement.innerHTML = "";
+        jsc.addConfetti()
     }
 }
 
